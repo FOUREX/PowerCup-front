@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    --color-brand: #c83e2f;
+    --color-primary: var(--color-brand);
+}
+
+body {
+    color: white;
+
+    margin: 0;
+}
+
+.content {
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, .1);
+    max-width: 1200px;
+}
