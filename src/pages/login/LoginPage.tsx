@@ -1,11 +1,14 @@
 import {Card, Button, Checkbox, Form, Input} from "antd";
 import type { FormProps } from 'antd';
-import axios from "axios";
 
 import NavBar from "../../components/NavBar/NavBar.tsx";
 
+import localization from "../../localizations/ua.json"
+
 import "../../index.css"
-import {SERVER} from "../../config.ts";
+import {api} from "../../api.ts";
+
+const page_localization = localization["page"]["login"]
 
 type FieldType = {
   username?: string;
@@ -13,12 +16,7 @@ type FieldType = {
 };
 
 const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-  const instance = axios.create({
-    baseURL: SERVER,
-    withCredentials: true
-  })
-
-  instance.post(
+  api.post(
     "/auth/login",
     {
       "name": values["login"],
@@ -60,10 +58,10 @@ function LoginPage() {
             autoComplete="off"
           >
             <Form.Item<FieldType>
-              label="Логін"
+              label={page_localization["login_label"]}
               name="login"
               rules={[
-                { required: true, message: 'Введіть логін!' }
+                { required: true, message: page_localization["login_is_required_message"] }
               ]}
             >
               <Input />

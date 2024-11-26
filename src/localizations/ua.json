@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "name": "Українська",
+    "icon": "https://..."
+  },
+  "component": {
+    "nav_bar": {
+
+    }
+  },
+  "page": {
+    "login": {
+      "login_label": "Логін",
+      "login_is_required_message": ""
+    }
+  }
+}
