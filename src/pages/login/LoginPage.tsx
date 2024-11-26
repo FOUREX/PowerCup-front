@@ -6,27 +6,28 @@ import NavBar from "../../components/NavBar/NavBar.tsx";
 import localization from "../../localizations/ua.json"
 
 import "../../index.css"
-import {api} from "../../api.ts";
+import {API} from "../../api/api.ts";
 
 const page_localization = localization["page"]["login"]
 
 type FieldType = {
-  username?: string;
+  login?: string;
   password?: string;
 };
 
-const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-  api.post(
-    "/auth/login",
-    {
-      "name": values["login"],
-      "password": values["password"]
-    }
-  ).then(r => {
-    if (r.status != 204) {
-      alert("Pizdec!")
-    }
-  })
+const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+  try {
+    const user = await API.login({
+      login: values.login ?? '',
+      password: values.password ?? ''
+    })
+
+    console.log(user)
+
+  } catch (error) {
+    console.log(1)
+  }
+
 };
 
 const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
