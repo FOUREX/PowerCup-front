@@ -10,9 +10,6 @@ type FieldType = {
   password?: string;
 };
 
-/**
- * Use arow functions. I just like them more bruh
- */
 export const LoginPage = () => {
   const navigate = useNavigate()
 

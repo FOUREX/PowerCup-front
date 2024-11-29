@@ -16,9 +16,3 @@ export const CurrentUser = {
     localStorage.removeItem("user")
   }
 }
-
-export const getCurrentUser = (): User | null => {
-  const data = localStorage.getItem("user")
-
-  return typeof data === "undefined" ? null : JSON.parse(data)
-}
