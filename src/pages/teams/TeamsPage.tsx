@@ -1,16 +1,14 @@
 import {useEffect, useState} from "react";
-import {get_teams} from "../../api/api.ts";
+import {fetchTeams} from "../../api/api.ts";
+import {Team} from "../../api/types.ts";
 
 export const TeamsPage = () => {
-  const [teams, setTeams] = useState([])
-
-
-  const fetchTeams = async () => {
-    setTeams(await get_teams())
-  }
+  const [teams, setTeams] = useState<Team[]>([])
 
   useEffect(() => {
-    fetchTeams().catch(console.error)
+    fetchTeams().then(
+      (teams) => setTeams(teams)
+    )
   }, [])
 
   return (

@@ -31,7 +31,7 @@ export const login = async (data: LoginRequest): Promise<User> => {
   };
 };
 
-export const get_teams = async (): Promise<Array<Team>> => {
+export const fetchTeams = async (): Promise<Array<Team>> => {
   const response = await instance.get<Team[]>("/teams");
 
   if (response.status !== HttpStatusCode.Ok) {
