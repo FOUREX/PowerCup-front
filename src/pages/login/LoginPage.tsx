@@ -11,7 +11,7 @@ type FieldType = {
 };
 
 /**
- * Use arow functions. I just like them more
+ * Use arow functions. I just like them more bruh
  */
 export const LoginPage = () => {
   const navigate = useNavigate()
