@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {fetchTeams} from "../../api/api.ts";
-import {Team} from "../../api/types.ts";
+import {fetchTeams} from "../../api";
+import {Team} from "../../api";
 
 export const TeamsPage = () => {
   const [teams, setTeams] = useState<Team[]>([])

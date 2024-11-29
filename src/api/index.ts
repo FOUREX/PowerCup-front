@@ -3,6 +3,9 @@
  * For example: import { HomePage, LoginPage } from "./pages";
  * This rule works for all modules
  */
-import { login } from "./api";
+import { fetchTeams, login } from './api'
+import { LoginRequest, PersonalData, User, TeamMember, Team } from './types'
 
-export { login };
+export { login, fetchTeams }
+export type { LoginRequest, PersonalData, User, TeamMember, Team }
+
