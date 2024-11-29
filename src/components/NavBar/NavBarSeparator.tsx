@@ -1,10 +1,8 @@
-import "../../index.css"
-import "./style.css"
+import "../../index.css";
+import "./style.css";
 
 function NavBarSeparator() {
-  return (
-    <div style={{height: 68}} />
-  )
+  return <div style={{ height: 68 }} />;
 }
 
-export default NavBarSeparator
+export default NavBarSeparator;

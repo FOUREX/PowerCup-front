@@ -1,4 +1,3 @@
-import {Button} from "antd";
 import NavBar from "../../components/NavBar/NavBar.tsx";
 
 function RootPage() {

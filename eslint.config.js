@@ -23,15 +23,6 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
-      "@typescript-eslint/no-unused-vars": [
-        "off", // Или "error"
-        {
-          "vars": "all", // Проверять все переменные
-          "args": "none", // Игнорировать неиспользуемые аргументы функций
-          "ignoreRestSiblings": true, // Игнорировать rest-паттерны
-          "caughtErrors": "none" // Игнорировать переменные в catch
-        },
-      ],
     },
   },
 )
