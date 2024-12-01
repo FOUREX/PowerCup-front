@@ -1,56 +1,6 @@
-type Locale = "en" | "ua";
+type Locale = keyof typeof TRANSLATIONS;
 
-type TranslationStructure = {
-  NAVBAR: {
-    TEAMS: string;
-    MATCHES: string;
-    TOURNAMENTS: string;
-    LOGIN: string;
-    LOGOUT: string;
-    REGISTER: string;
-  };
-  TEAM_MEMBER_ROLE: {
-    OWNER: string;
-    ADMIN: string;
-    MEMBER: string;
-    RESERVED: string;
-  }
-  PAGES: {
-    LOGIN: {
-      AUTH: string;
-      USERNAME: string;
-      PASSWORD: string;
-      ENTER_PASSWORD: string;
-      ENTER_USERNAME: string;
-      LOGIN: string;
-    };
-    HOME: {
-      TITLE: string;
-    };
-    TEAMS: {
-      ALL_TEAMS: string;
-      MY_TEAMS: string;
-      MEMBERS: string;
-      MATCHES: string;
-      TOURNAMENTS: string;
-      CREATE_TEAM: string;
-      TEAM_NOT_SELECTED: string;
-      NAME: string;
-      ENTER_TEAM_NAME: string;
-      ADD_MEMBER: string;
-    };
-  };
-};
-
-type Translations = {
-  [key in Locale]: TranslationStructure;
-};
-
-const getCurrentLocale = (): Locale => {
-  return "ua"; // Simulating a locale getter, e.g., from a browser or config
-};
-
-const TRANSLATIONS: Translations = {
+const TRANSLATIONS = {
   en: {
     NAVBAR: {
       TEAMS: "Teams",
@@ -133,6 +83,8 @@ const TRANSLATIONS: Translations = {
       }
     },
   },
-};
+} as const;
+
+const getCurrentLocale = (): Locale => "ua";
 
 export const LOCALES = TRANSLATIONS[getCurrentLocale()];
