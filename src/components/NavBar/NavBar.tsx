@@ -17,15 +17,15 @@ function NavBar() {
     navigate("/")
   }
 
+  console.log(LOCALES.PAGES.TEAMS.ADD_MEMBER)
+
   return (
-    <header className="z-50 flex justify-center fixed w-full text-lg h-17 font-medium mb-28">
+    <header className="z-50 flex justify-center fixed w-full top-0 text-lg h-17 font-medium mb-28">
       <div
         className="flex justify-between rounded-md p-2 m-3 h-full items-center box-border"
         style={{
           width: 1200,
           maxWidth: 1200,
-          // boxShadow: "0 0 10px 10px rgba(from var(--color-primary) r g b / .1)",
-          // border: "1px solid var(--color-primary)",
           backgroundColor: "rgba(from var(--color-background-secondary) r g b / .1)",
           backdropFilter: "blur(5px)"
         }}
