@@ -3,7 +3,7 @@ import type { FormProps } from "antd";
 import {useNavigate} from "react-router";
 import { login } from "../../api";
 import { LOCALES } from "../../locales";
-import {CurrentUser} from "../../utils.ts";
+import {CurrentUser} from "../../utils";
 
 type FieldType = {
   username?: string;
@@ -33,11 +33,6 @@ export const LoginPage = () => {
       <Card
         title={LOCALES.PAGES.LOGIN.AUTH}
         className="mx-auto my-auto"
-        style={{
-          backgroundColor: "var(--color-bg-secondary)",
-          border: "1px solid var(--color-primary)",
-          color: "white",
-        }}
       >
         <Form
           name="basic"
