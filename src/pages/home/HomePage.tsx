@@ -1,8 +1,5 @@
 import { LOCALES } from "../../locales";
 
-/**
- * Use arow functions. I just like them more
- */
 export const HomePage = () => {
   return (
     <div className="flex h-screen">
