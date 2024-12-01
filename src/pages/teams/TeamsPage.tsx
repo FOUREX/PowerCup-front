@@ -1,19 +1,23 @@
-import {Button, Card, Form, FormProps, Input, Menu, MenuProps, Spin} from "antd";
-import MenuItem from "antd/es/menu/MenuItem";
 import {useEffect, useRef, useState} from "react";
 import {Link} from "react-router";
-import {fetchTeams} from "../../api";
-import type {Team, TeamMember, User} from "../../api/types.ts";
-import {LOCALES} from "../../locales";
+
+import {Alert, Button, Card, Form, FormProps, Input, Menu, MenuProps, Spin} from "antd";
+import MenuItem from "antd/es/menu/MenuItem";
 import {UsergroupAddOutlined, EditOutlined, TeamOutlined, PlusOutlined} from "@ant-design/icons"
-import {CurrentUser} from "../../utils";
+
+import {fetchTeams, createTeam} from "api";
+import {Team, TeamMember, User} from "api/types";
+import {LOCALES} from "locales";
+import {CurrentUser} from "utils";
 
 
 type MenuItem = Required<MenuProps>['items'][number];
 type State = null | "view" | "edit" | "create"
-type FieldType = {
+type CreateTeamFieldType = {
   name: string;
+  members: []
 };
+
 
 const memberRole: string[] = [
   LOCALES.TEAM_MEMBER_ROLE.OWNER,
@@ -71,10 +75,15 @@ export const TeamsPage = () => {
         }])
       }))
     }
-  }, [teamsFetchedRef])
+  }, [currentUser, teamsFetchedRef])
 
-  const onTeamCreate: FormProps<FieldType>["onFinish"] = async (values) => {
-    console.log(values)
+  const onTeamCreate: FormProps<CreateTeamFieldType>["onFinish"] = async (values) => {
+    createTeam(values).then(
+      createdTeam => {
+        console.log(createdTeam)
+        teamsFetchedRef.current = false
+      }
+    )
   }
 
   const onTeamSelected = (key) => {
@@ -172,7 +181,7 @@ export const TeamsPage = () => {
               layout="vertical"
               onFinish={onTeamCreate}
             >
-              <Form.Item<FieldType>
+              <Form.Item<CreateTeamFieldType>
                 label={LOCALES.PAGES.TEAMS.NAME}
                 name="name"
                 rules={[
@@ -185,7 +194,7 @@ export const TeamsPage = () => {
                 <Input />
               </Form.Item>
 
-              <Form.Item<FieldType>
+              <Form.Item<CreateTeamFieldType>
                 label={LOCALES.PAGES.TEAMS.MEMBERS}
                 name="members"
               >
@@ -211,6 +220,7 @@ export const TeamsPage = () => {
             {LOCALES.PAGES.TEAMS.TEAM_NOT_SELECTED}
           </span>
         )}
+        <Alert message="Yep" type="error" closable />
       </div>
     </div>
   );
