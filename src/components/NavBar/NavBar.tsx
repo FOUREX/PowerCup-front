@@ -17,8 +17,6 @@ function NavBar() {
     navigate("/")
   }
 
-  console.log(LOCALES.PAGES.TEAMS.ADD_MEMBER)
-
   return (
     <header className="z-50 flex justify-center fixed w-full top-0 text-lg h-17 font-medium mb-28">
       <div
