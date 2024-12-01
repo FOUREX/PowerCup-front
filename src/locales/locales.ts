@@ -1,7 +1,3 @@
-/**
- * Piece of shid but for this case ok.
- * Use 'TranslationStructure' as template for each lang and don't forget to update it
- */
 type Locale = "en" | "ua";
 
 type TranslationStructure = {
@@ -13,6 +9,12 @@ type TranslationStructure = {
     LOGOUT: string;
     REGISTER: string;
   };
+  TEAM_MEMBER_ROLE: {
+    OWNER: string;
+    ADMIN: string;
+    MEMBER: string;
+    RESERVED: string;
+  }
   PAGES: {
     LOGIN: {
       AUTH: string;
@@ -24,6 +26,18 @@ type TranslationStructure = {
     };
     HOME: {
       TITLE: string;
+    };
+    TEAMS: {
+      ALL_TEAMS: string;
+      MY_TEAMS: string;
+      MEMBERS: string;
+      MATCHES: string;
+      TOURNAMENTS: string;
+      CREATE_TEAM: string;
+      TEAM_NOT_SELECTED: string;
+      NAME: string;
+      ENTER_TEAM_NAME: string;
+      ADD_MEMBER: string;
     };
   };
 };
@@ -46,6 +60,12 @@ const TRANSLATIONS: Translations = {
       LOGOUT: "Logout",
       REGISTER: "Register",
     },
+    TEAM_MEMBER_ROLE: {
+      OWNER: "Owner",
+      ADMIN: "Admin",
+      MEMBER: "Member",
+      RESERVED: "Reserved",
+    },
     PAGES: {
       LOGIN: {
         AUTH: "Authorization",
@@ -58,6 +78,18 @@ const TRANSLATIONS: Translations = {
       HOME: {
         TITLE: "Home page!!!",
       },
+      TEAMS: {
+        ALL_TEAMS: "All teams",
+        MY_TEAMS: "My teams",
+        MEMBERS: "Members",
+        MATCHES: "Matches",
+        TOURNAMENTS: "Tournaments",
+        CREATE_TEAM: "Create team",
+        TEAM_NOT_SELECTED: "Team not selected",
+        NAME: "Name",
+        ENTER_TEAM_NAME: "Enter team name!",
+        ADD_MEMBER: "Add member",
+      }
     },
   },
   ua: {
@@ -68,6 +100,12 @@ const TRANSLATIONS: Translations = {
       LOGIN: "Увійти",
       LOGOUT: "Вийти",
       REGISTER: "Зареєструватися",
+    },
+    TEAM_MEMBER_ROLE: {
+      OWNER: "Власник",
+      ADMIN: "Адмін",
+      MEMBER: "Учасник",
+      RESERVED: "Резезервний",
     },
     PAGES: {
       LOGIN: {
@@ -81,6 +119,18 @@ const TRANSLATIONS: Translations = {
       HOME: {
         TITLE: "Ти вдома козаче :)",
       },
+      TEAMS: {
+        ALL_TEAMS: "Всі команди",
+        MY_TEAMS: "Мої команди",
+        MEMBERS: "Учасники",
+        MATCHES: "Матчі",
+        TOURNAMENTS: "Турніри",
+        CREATE_TEAM: "Створити команду",
+        TEAM_NOT_SELECTED: "Команда не вибрана",
+        NAME: "Назва",
+        ENTER_TEAM_NAME: "Введіть назву команди!",
+        ADD_MEMBER: "Додати учасника",
+      }
     },
   },
 };
