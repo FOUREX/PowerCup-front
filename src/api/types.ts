@@ -25,3 +25,8 @@ export interface Team {
   name: string
   members: Array<TeamMember>
 }
+
+export interface CreateTeam {
+  name: string
+  members: Array<{user_id: number, role: number}>
+}
