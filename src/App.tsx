@@ -1,21 +1,31 @@
 import "./App.css";
-import NavBarSeparator from "./components/NavBar/NavBarSeparator.tsx";
-import { HomePage, LoginPage } from "./pages";
+import {ConfigProvider, theme} from "antd";
+import { HomePage, LoginPage, TeamsPage, MatchesPage } from "./pages";
 import { NavBar } from "./components";
 import { Route, Routes } from "react-router";
-import {TeamsPage} from "./pages/teams/TeamsPage.tsx";
+
+function getCssVariableValue(variableName: string) {
+  return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+}
 
 function App() {
   return (
-    <>
+    <ConfigProvider
+      theme={{
+        algorithm: theme.darkAlgorithm,
+        token: {
+          colorPrimary: getCssVariableValue("--color-primary")
+        }
+      }}
+    >
       <NavBar />
-      <NavBarSeparator />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/teams" element={<TeamsPage />} />
+        <Route path="/matches" element={<MatchesPage />} />
       </Routes>
-    </>
+    </ConfigProvider>
   );
 }
 
