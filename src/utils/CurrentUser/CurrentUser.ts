@@ -1,11 +1,11 @@
-import {User} from "api/types.ts"
+import {User} from "../../api/types.ts"
 
 
 export const CurrentUser = {
-  get: (): User | null => {
+  get: (): User | undefined => {
     const data = localStorage.getItem("user")
 
-    return typeof data === "undefined" ? null : JSON.parse(data)
+    return data == undefined ? data : JSON.parse(data)
   },
 
   set: (user: User) => {
