@@ -5,5 +5,7 @@
  */
 import { HomePage } from "./home/HomePage";
 import { LoginPage } from "./login/LoginPage";
+import { MatchesPage } from "./matches/MatchesPage.tsx";
+import { TeamsPage } from "./teams/TeamsPage.tsx";
 
-export { LoginPage, HomePage };
+export { LoginPage, HomePage, MatchesPage, TeamsPage };
