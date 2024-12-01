@@ -1,5 +1,5 @@
 import { login } from './auth.api.ts'
-import { fetchTeams } from './teams.api.ts'
+import { fetchTeams, createTeam } from "./teams.api.ts"
 
-export { login, fetchTeams }
+export { login, fetchTeams, createTeam }
 
