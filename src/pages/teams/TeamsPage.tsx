@@ -1,14 +1,22 @@
 import {useEffect, useRef, useState} from "react";
 import {Link} from "react-router";
 
-import {Alert, Button, Card, Form, FormProps, Input, Menu, MenuProps, Spin} from "antd";
+import {Alert, Button, Card, Collapse, Form, FormProps, Input, Menu, MenuProps, Spin} from "antd";
 import MenuItem from "antd/es/menu/MenuItem";
-import {UsergroupAddOutlined, EditOutlined, TeamOutlined, PlusOutlined} from "@ant-design/icons"
+import {
+  UsergroupAddOutlined,
+  EditOutlined,
+  TeamOutlined,
+  PlusOutlined,
+  SettingOutlined,
+  UserAddOutlined
+} from "@ant-design/icons";
 
 import {fetchTeams, createTeam} from "api";
 import {Team, TeamMember, User} from "api/types";
 import {LOCALES} from "locales";
 import {CurrentUser} from "utils";
+import {TeamMembers, TeamOverview} from "../../components";
 
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -98,17 +106,22 @@ export const TeamsPage = () => {
   }
 
   return (
-    <div className="content flex h-screen box-border">
-      <div className="flex flex-col w-56 gap-3">
+    <div className="content flex box-border gap-3">
+      <div className="flex flex-col max-w-56 w-full gap-3">
         <Button
           type="primary"
           disabled={currentUser == undefined}
           size="large"
           icon={<UsergroupAddOutlined />}
           onClick={() => setState("create")}
-          style={currentUser ? {
-            boxShadow: "0 0 7px 4px rgba(from var(--color-primary) r g b / .5",
-          } : {}}
+          style={
+            currentUser
+              ? {
+                  boxShadow:
+                    "0 0 7px 4px rgba(from var(--color-primary) r g b / .5",
+                }
+              : {}
+          }
         >
           {LOCALES.PAGES.TEAMS.CREATE_TEAM}
         </Button>
@@ -120,7 +133,57 @@ export const TeamsPage = () => {
         )}
       </div>
 
-      <div className="mx-auto my-auto">
+      {state == "view" | state == "edit" && currentTeam ? (
+        <div className="flex gap-3 w-full flex-wrap content-start">
+          <Collapse
+            className="h-min min-w-96 flex-1"
+            items={[
+              {
+                key: "overview",
+                label: LOCALES.PAGES.TEAMS.OVERVIEW,
+                children: <TeamOverview team={currentTeam} />,
+              },
+            ]}
+          />
+
+          <Collapse
+            className="h-min min-w-96 flex-1"
+            items={[
+              {
+                key: "members",
+                label: LOCALES.PAGES.TEAMS.MEMBERS,
+                children: <TeamMembers members={currentTeam.members} />,
+              },
+            ]}
+          />
+
+          <Collapse
+            className="h-min min-w-96 w-full"
+            items={[
+              {
+                key: "members",
+                label: "Матчі",
+              },
+            ]}
+          />
+
+          <Collapse
+            className="h-min min-w-96 w-full"
+            items={[
+              {
+                key: "members",
+                label: "Турніри",
+              },
+            ]}
+          />
+        </div>
+      ) : (
+        <span className="mx-auto my-auto" style={{ color: "var(--color-background-secondary)" }}>
+          {LOCALES.PAGES.TEAMS.TEAM_NOT_SELECTED}
+        </span>
+      )}
+
+      <div className="mx-auto my-auto" style={{ display: "none" }}>
         {state == "view" && currentTeam ? (
           <Card
             className="w-72"
@@ -177,10 +240,7 @@ export const TeamsPage = () => {
               </div>
             }
           >
-            <Form
-              layout="vertical"
-              onFinish={onTeamCreate}
-            >
+            <Form layout="vertical" onFinish={onTeamCreate}>
               <Form.Item<CreateTeamFieldType>
                 label={LOCALES.PAGES.TEAMS.NAME}
                 name="name"
@@ -188,8 +248,8 @@ export const TeamsPage = () => {
                   {
                     required: true,
                     message: LOCALES.PAGES.TEAMS.ENTER_TEAM_NAME,
-                  }]
-                }
+                  },
+                ]}
               >
                 <Input />
               </Form.Item>

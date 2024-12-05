@@ -16,6 +16,15 @@ const TRANSLATIONS = {
       MEMBER: "Member",
       RESERVED: "Reserved",
     },
+    TEAM_OVERVIEW: {
+      LEADER: "Leader",
+      NUMBER_OF_MEMBERS: "Number of members",
+    },
+    TEAM_MEMBERS: {
+      USER: "User",
+      ROLE: "Role",
+      ACTIONS: "Actions"
+    },
     PAGES: {
       LOGIN: {
         AUTH: "Authorization",
@@ -39,6 +48,7 @@ const TRANSLATIONS = {
         NAME: "Name",
         ENTER_TEAM_NAME: "Enter team name!",
         ADD_MEMBER: "Add member",
+        OVERVIEW: "Overview",
       }
     },
   },
@@ -56,6 +66,15 @@ const TRANSLATIONS = {
       ADMIN: "Адмін",
       MEMBER: "Учасник",
       RESERVED: "Резезервний",
+    },
+    TEAM_OVERVIEW: {
+      LEADER: "Лідер",
+      NUMBER_OF_MEMBERS: "Кількість учасників",
+    },
+    TEAM_MEMBERS: {
+      USER: "Користувач",
+      ROLE: "Роль",
+      ACTIONS: "Дії"
     },
     PAGES: {
       LOGIN: {
@@ -80,6 +99,7 @@ const TRANSLATIONS = {
         NAME: "Назва",
         ENTER_TEAM_NAME: "Введіть назву команди!",
         ADD_MEMBER: "Додати учасника",
+        OVERVIEW: "Огляд",
       }
     },
   },
