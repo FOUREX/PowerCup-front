@@ -1,3 +1,3 @@
-import { LOCALES } from "./locales";
+import { LOCALES, i18n } from "./locales";
 
-export { LOCALES };
+export { LOCALES, i18n };
