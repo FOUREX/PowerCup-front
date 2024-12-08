@@ -1,14 +1,39 @@
 import "./App.css";
 import {ConfigProvider, theme} from "antd";
+import {useEffect, useRef} from "react";
 import { HomePage, LoginPage, TeamsPage, MatchesPage } from "./pages";
-import {Footer, NavBar} from "./components";
-import { Route, Routes } from "react-router";
+import { Footer, NavBar } from "./components";
+import {Route, Routes, useNavigate} from "react-router";
+import {getMe} from "api";
+import {CurrentUser} from "./utils";
 
 function getCssVariableValue(variableName: string) {
   return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
 }
 
 function App() {
+  const userFetched = useRef<boolean>(false)
+  const navigate = useNavigate()
+
+  const checkAuth = async () => {
+    if (!CurrentUser.get() || userFetched.current) {
+      return
+    }
+
+    userFetched.current = true
+
+    try {
+      await getMe()
+    } catch {
+      CurrentUser.del()
+      navigate("/")
+    }
+  }
+
+  useEffect(() => {
+    checkAuth().then()
+  })
+
   return (
     <ConfigProvider
       theme={{
