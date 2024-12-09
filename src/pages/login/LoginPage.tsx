@@ -1,8 +1,8 @@
 import { Card, Button, Form, Input } from "antd";
 import type { FormProps } from "antd";
+import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router";
 import { login } from "../../api";
-import { LOCALES } from "../../locales";
 import {CurrentUser} from "../../utils";
 
 type FieldType = {
@@ -11,6 +11,7 @@ type FieldType = {
 };
 
 export const LoginPage = () => {
+  const {t} = useTranslation()
   const navigate = useNavigate()
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
@@ -31,7 +32,7 @@ export const LoginPage = () => {
   return (
     <div className="flex h-screen">
       <Card
-        title={LOCALES.PAGES.LOGIN.AUTH}
+        title={t("PAGES.LOGIN.AUTH")}
         className="mx-auto my-auto"
       >
         <Form
@@ -45,12 +46,12 @@ export const LoginPage = () => {
           autoComplete="off"
         >
           <Form.Item<FieldType>
-            label={LOCALES.PAGES.LOGIN.USERNAME}
+            label={t("PAGES.LOGIN.USERNAME")}
             name="username"
             rules={[
               {
                 required: true,
-                message: LOCALES.PAGES.LOGIN.ENTER_USERNAME,
+                message: t("PAGES.LOGIN.ENTER_USERNAME"),
               },
             ]}
           >
@@ -58,10 +59,10 @@ export const LoginPage = () => {
           </Form.Item>
 
           <Form.Item<FieldType>
-            label={LOCALES.PAGES.LOGIN.PASSWORD}
+            label={t("PAGES.LOGIN.PASSWORD")}
             name="password"
             rules={[
-              { required: true, message: LOCALES.PAGES.LOGIN.ENTER_PASSWORD },
+              { required: true, message: t("PAGES.LOGIN.ENTER_PASSWORD") },
             ]}
           >
             <Input.Password />
@@ -69,7 +70,7 @@ export const LoginPage = () => {
 
           <Form.Item label={null}>
             <Button type="primary" htmlType="submit">
-              {LOCALES.PAGES.LOGIN.LOGIN}
+              {t("PAGES.LOGIN.LOGIN")}
             </Button>
           </Form.Item>
         </Form>
