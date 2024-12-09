@@ -8,16 +8,6 @@ type Locale = "en" | "ua";
 
 const getCurrentLocale = (): Locale => "ua";
 
-declare module "i18next" {
-  interface CustomTypeOptions {
-    resources: {
-      en: typeof import("./locales/en.json");
-      ua: typeof import("./locales/ua.json");
-    };
-  }
-}
-
-
 i18n
   .use(initReactI18next)
   .init({
