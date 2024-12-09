@@ -56,7 +56,7 @@ function NavBar() {
               <Button
                 onClick={on_logout_button_click}
               >
-                Вийти
+                {t("NAVBAR.LOGOUT")}
               </Button>
             </>
           ) : (
