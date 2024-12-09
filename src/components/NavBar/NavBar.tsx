@@ -8,7 +8,7 @@ import {CurrentUser} from "../../utils";
 
 
 function NavBar() {
-  const {t} = useTranslation()
+  const { t }: { t: (key: string) => string } = useTranslation()
 
   const navigate = useNavigate()
   const current_user = CurrentUser.get()

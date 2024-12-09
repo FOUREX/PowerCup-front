@@ -47,7 +47,7 @@ const icons: {[key in State]} = {
 }
 
 export const TeamsPage = () => {
-  const {t} = useTranslation()
+  const { t }: { t: (key: string) => string } = useTranslation()
 
   const memberRole: string[] = [
     t("TEAM_MEMBER_ROLE.OWNER"),

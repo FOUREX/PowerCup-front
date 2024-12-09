@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const TeamMembers: React.FC<Props> = ({members}) => {
-  const {t} = useTranslation()
+  const { t }: { t: (key: string) => string } = useTranslation()
 
   const columns = [
     {

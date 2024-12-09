@@ -1,7 +1,7 @@
 import {useTranslation} from "react-i18next";
 
 export const HomePage = () => {
-  const {t} = useTranslation()
+  const { t }: { t: (key: string) => string } = useTranslation()
 
   return (
     <div className="flex h-screen">

@@ -11,7 +11,7 @@ type FieldType = {
 };
 
 export const LoginPage = () => {
-  const {t} = useTranslation()
+  const { t }: { t: (key: string) => string } = useTranslation()
   const navigate = useNavigate()
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
