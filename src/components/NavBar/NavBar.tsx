@@ -1,13 +1,15 @@
 import "../../index.css";
-import { LOCALES } from "../../locales";
 import "./style.css";
 
 import { Button } from "antd";
+import {useTranslation} from "react-i18next";
 import {Link, useNavigate} from "react-router";
 import {CurrentUser} from "../../utils";
 
 
 function NavBar() {
+  const {t} = useTranslation()
+
   const navigate = useNavigate()
   const current_user = CurrentUser.get()
   const is_logged = current_user != undefined
@@ -43,9 +45,9 @@ function NavBar() {
           </Link>
         </div>
         <div className="flex gap-3">
-          <Link to="/teams">{LOCALES.NAVBAR.TEAMS}</Link>
-          <Link to="/matches">{LOCALES.NAVBAR.MATCHES}</Link>
-          <Link to="/tournaments">{LOCALES.NAVBAR.TOURNAMENTS}</Link>
+          <Link to="/teams">{t("NAVBAR.TEAMS")}</Link>
+          <Link to="/matches">{t("NAVBAR.MATCHES")}</Link>
+          <Link to="/tournaments">{t("NAVBAR.TOURNAMENTS")}</Link>
         </div>
         <div className="flex gap-x-3" style={{ textAlign: "justify" }}>
           {is_logged ? (
@@ -60,11 +62,11 @@ function NavBar() {
           ) : (
             <>
               <Link to="/login">
-                <Button>{LOCALES.NAVBAR.LOGIN}</Button>
+                <Button>{t("NAVBAR.LOGIN")}</Button>
               </Link>
 
               <Link to="/register">
-                <Button type="primary">{LOCALES.NAVBAR.REGISTER}</Button>
+                <Button type="primary">{t("NAVBAR.REGISTER")}</Button>
               </Link>
             </>
           )}

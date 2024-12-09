@@ -1,0 +1,51 @@
+{
+  "NAVBAR": {
+    "TEAMS": "Teams",
+    "MATCHES": "Matches",
+    "TOURNAMENTS": "Tournaments",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "REGISTER": "Register"
+  },
+  "TEAM_MEMBER_ROLE": {
+    "OWNER": "Owner",
+    "ADMIN": "Admin",
+    "MEMBER": "Member",
+    "RESERVED": "Reserved"
+  },
+  "TEAM_OVERVIEW": {
+    "LEADER": "Leader",
+    "NUMBER_OF_MEMBERS": "Number of members"
+  },
+  "TEAM_MEMBERS": {
+    "USER": "User",
+    "ROLE": "Role",
+    "ACTIONS": "Actions"
+  },
+  "PAGES": {
+    "LOGIN": {
+      "AUTH": "Authorization",
+      "USERNAME": "Username",
+      "LOGIN": "Login",
+      "PASSWORD": "Password",
+      "ENTER_PASSWORD": "Enter password!",
+      "ENTER_USERNAME": "Enter username!"
+    },
+    "HOME": {
+      "TITLE": "Home page!!!"
+    },
+    "TEAMS": {
+      "ALL_TEAMS": "All teams",
+      "MY_TEAMS": "My teams",
+      "MEMBERS": "Members",
+      "MATCHES": "Matches",
+      "TOURNAMENTS": "Tournaments",
+      "CREATE_TEAM": "Create team",
+      "TEAM_NOT_SELECTED": "Team not selected",
+      "NAME": "Name",
+      "ENTER_TEAM_NAME": "Enter team name!",
+      "ADD_MEMBER": "Add member",
+      "OVERVIEW": "Overview"
+    }
+  }
+}

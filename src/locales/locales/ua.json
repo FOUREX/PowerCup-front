@@ -1,0 +1,51 @@
+{
+  "NAVBAR": {
+    "TEAMS": "Команди",
+    "MATCHES": "Матчі",
+    "TOURNAMENTS": "Турніри",
+    "LOGIN": "Увійти",
+    "LOGOUT": "Вийти",
+    "REGISTER": "Зареєструватися"
+  },
+  "TEAM_MEMBER_ROLE": {
+    "OWNER": "Власник",
+    "ADMIN": "Адмін",
+    "MEMBER": "Учасник",
+    "RESERVED": "Резезервний"
+  },
+  "TEAM_OVERVIEW": {
+    "LEADER": "Лідер",
+    "NUMBER_OF_MEMBERS": "Кількість учасників"
+  },
+  "TEAM_MEMBERS": {
+    "USER": "Користувач",
+    "ROLE": "Роль",
+    "ACTIONS": "Дії"
+  },
+  "PAGES": {
+    "LOGIN": {
+      "AUTH": "Авторизація",
+      "USERNAME": "Логін",
+      "LOGIN": "Увійти",
+      "PASSWORD": "Пароль",
+      "ENTER_PASSWORD": "Введіть пароль!",
+      "ENTER_USERNAME": "Введіть логін!"
+    },
+    "HOME": {
+      "TITLE": "Ти вдома козаче :)"
+    },
+    "TEAMS": {
+      "ALL_TEAMS": "Всі команди",
+      "MY_TEAMS": "Мої команди",
+      "MEMBERS": "Учасники",
+      "MATCHES": "Матчі",
+      "TOURNAMENTS": "Турніри",
+      "CREATE_TEAM": "Створити команду",
+      "TEAM_NOT_SELECTED": "Команда не вибрана",
+      "NAME": "Назва",
+      "ENTER_TEAM_NAME": "Введіть назву команди!",
+      "ADD_MEMBER": "Додати учасника",
+      "OVERVIEW": "Огляд"
+    }
+  }
+}

@@ -2,7 +2,7 @@ import * as React from "react";
 import {Avatar, Button, Divider} from "antd";
 import {SettingOutlined} from "@ant-design/icons"
 import {Team} from "api/types.ts";
-import {LOCALES} from "../../locales";
+import {useTranslation} from "react-i18next";
 import {UserTag} from "../UserTag/UserTag.tsx";
 
 
@@ -12,6 +12,7 @@ interface Props {
 
 
 export const TeamOverview: React.FC<Props> = ({ team }) => {
+  const {t} = useTranslation()
   const leader = team.members.find((member) => (member.role == 0))
 
   return (
@@ -33,8 +34,8 @@ export const TeamOverview: React.FC<Props> = ({ team }) => {
       <Divider className="my-3" />
 
       <div className="flex flex-col font-semibold">
-        <span>{LOCALES.TEAM_OVERVIEW.LEADER}: <UserTag user={leader.user} /></span>
-        <span>{LOCALES.TEAM_OVERVIEW.NUMBER_OF_MEMBERS}: {team.members.length}</span>
+        <span>{t("TEAM_OVERVIEW.LEADER")}: <UserTag user={leader.user} /></span>
+        <span>{t("TEAM_OVERVIEW.NUMBER_OF_MEMBERS")}: {team.members.length}</span>
       </div>
     </div>
   );
