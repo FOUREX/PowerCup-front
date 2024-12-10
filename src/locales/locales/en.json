@@ -1,51 +1,64 @@
 {
   "NAVBAR": {
-    "TEAMS": "Teams",
-    "MATCHES": "Matches",
-    "TOURNAMENTS": "Tournaments",
     "LOGIN": "Login",
     "LOGOUT": "Logout",
-    "REGISTER": "Register"
+    "MATCHES": "Matches",
+    "REGISTER": "Register",
+    "TEAMS": "Teams",
+    "TOURNAMENTS": "Tournaments"
+  },
+  "NOTIFICATION": {
+    "ERROR": "Error",
+    "SUCCESS": "Success"
+  },
+  "PAGES": {
+    "HOME": {
+      "TITLE": "Home page!!!"
+    },
+    "LOGIN": {
+      "AUTH": "Authorization",
+      "ENTER_PASSWORD": "Enter password!",
+      "ENTER_USERNAME": "Enter username!",
+      "INVALID_USERNAME": "Allowed only: A-z, 0-9 and _",
+      "LOGIN": "Login",
+      "NOTIFICATION": {
+        "LOGIN_FAILED": "Login failed"
+      },
+      "PASSWORD": "Password",
+      "USERNAME": "Username"
+    },
+    "TEAMS": {
+      "ADD_MEMBER": "Add member",
+      "ALL_TEAMS": "All teams",
+      "CREATE_TEAM": "Create team",
+      "ENTER_TEAM_NAME": "Enter team name!",
+      "MATCHES": "Matches",
+      "MEMBERS": "Members",
+      "MY_TEAMS": "My teams",
+      "NAME": "Name",
+      "OVERVIEW": "Overview",
+      "TEAM_NOT_SELECTED": "Team not selected",
+      "TOURNAMENTS": "Tournaments"
+    }
+  },
+  "TEAMS": {
+    "NOTIFICATION": {
+      "TEAM_CREATED_SUCCESS": "Team {{team_name}} successfully created"
+    }
+  },
+  "TEAM_MEMBERS": {
+    "ACTIONS": "Actions",
+    "ROLE": "Role",
+    "USER": "User"
   },
   "TEAM_MEMBER_ROLE": {
-    "OWNER": "Owner",
     "ADMIN": "Admin",
     "MEMBER": "Member",
+    "OWNER": "Owner",
     "RESERVED": "Reserved"
   },
   "TEAM_OVERVIEW": {
     "LEADER": "Leader",
     "NUMBER_OF_MEMBERS": "Number of members"
-  },
-  "TEAM_MEMBERS": {
-    "USER": "User",
-    "ROLE": "Role",
-    "ACTIONS": "Actions"
-  },
-  "PAGES": {
-    "LOGIN": {
-      "AUTH": "Authorization",
-      "USERNAME": "Username",
-      "LOGIN": "Login",
-      "PASSWORD": "Password",
-      "ENTER_PASSWORD": "Enter password!",
-      "ENTER_USERNAME": "Enter username!"
-    },
-    "HOME": {
-      "TITLE": "Home page!!!"
-    },
-    "TEAMS": {
-      "ALL_TEAMS": "All teams",
-      "MY_TEAMS": "My teams",
-      "MEMBERS": "Members",
-      "MATCHES": "Matches",
-      "TOURNAMENTS": "Tournaments",
-      "CREATE_TEAM": "Create team",
-      "TEAM_NOT_SELECTED": "Team not selected",
-      "NAME": "Name",
-      "ENTER_TEAM_NAME": "Enter team name!",
-      "ADD_MEMBER": "Add member",
-      "OVERVIEW": "Overview"
-    }
   }
 }

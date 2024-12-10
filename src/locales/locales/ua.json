@@ -1,51 +1,64 @@
 {
   "NAVBAR": {
-    "TEAMS": "Команди",
-    "MATCHES": "Матчі",
-    "TOURNAMENTS": "Турніри",
     "LOGIN": "Увійти",
     "LOGOUT": "Вийти",
-    "REGISTER": "Зареєструватися"
+    "MATCHES": "Матчі",
+    "REGISTER": "Зареєструватися",
+    "TEAMS": "Команди",
+    "TOURNAMENTS": "Турніри"
+  },
+  "NOTIFICATION": {
+    "ERROR": "Помилка",
+    "SUCCESS": "Успішно"
+  },
+  "PAGES": {
+    "HOME": {
+      "TITLE": "Ти вдома козаче :)"
+    },
+    "LOGIN": {
+      "AUTH": "Авторизація",
+      "ENTER_PASSWORD": "Введіть пароль!",
+      "ENTER_USERNAME": "Введіть логін!",
+      "INVALID_USERNAME": "Дозволено тільки: A-z, 0-9 and _",
+      "LOGIN": "Увійти",
+      "NOTIFICATION": {
+        "LOGIN_FAILED": "Не вдалося увійти"
+      },
+      "PASSWORD": "Пароль",
+      "USERNAME": "Логін"
+    },
+    "TEAMS": {
+      "ADD_MEMBER": "Додати учасника",
+      "ALL_TEAMS": "Всі команди",
+      "CREATE_TEAM": "Створити команду",
+      "ENTER_TEAM_NAME": "Введіть назву команди!",
+      "MATCHES": "Матчі",
+      "MEMBERS": "Учасники",
+      "MY_TEAMS": "Мої команди",
+      "NAME": "Назва",
+      "OVERVIEW": "Огляд",
+      "TEAM_NOT_SELECTED": "Команда не вибрана",
+      "TOURNAMENTS": "Турніри"
+    }
+  },
+  "TEAMS": {
+    "NOTIFICATION": {
+      "TEAM_CREATED_SUCCESS": "Команда {{team_name}} успішно створена"
+    }
+  },
+  "TEAM_MEMBERS": {
+    "ACTIONS": "Дії",
+    "ROLE": "Роль",
+    "USER": "Користувач"
   },
   "TEAM_MEMBER_ROLE": {
-    "OWNER": "Власник",
     "ADMIN": "Адмін",
     "MEMBER": "Учасник",
+    "OWNER": "Власник",
     "RESERVED": "Резезервний"
   },
   "TEAM_OVERVIEW": {
     "LEADER": "Лідер",
     "NUMBER_OF_MEMBERS": "Кількість учасників"
-  },
-  "TEAM_MEMBERS": {
-    "USER": "Користувач",
-    "ROLE": "Роль",
-    "ACTIONS": "Дії"
-  },
-  "PAGES": {
-    "LOGIN": {
-      "AUTH": "Авторизація",
-      "USERNAME": "Логін",
-      "LOGIN": "Увійти",
-      "PASSWORD": "Пароль",
-      "ENTER_PASSWORD": "Введіть пароль!",
-      "ENTER_USERNAME": "Введіть логін!"
-    },
-    "HOME": {
-      "TITLE": "Ти вдома козаче :)"
-    },
-    "TEAMS": {
-      "ALL_TEAMS": "Всі команди",
-      "MY_TEAMS": "Мої команди",
-      "MEMBERS": "Учасники",
-      "MATCHES": "Матчі",
-      "TOURNAMENTS": "Турніри",
-      "CREATE_TEAM": "Створити команду",
-      "TEAM_NOT_SELECTED": "Команда не вибрана",
-      "NAME": "Назва",
-      "ENTER_TEAM_NAME": "Введіть назву команди!",
-      "ADD_MEMBER": "Додати учасника",
-      "OVERVIEW": "Огляд"
-    }
   }
 }
