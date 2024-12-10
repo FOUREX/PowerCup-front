@@ -12,7 +12,7 @@ interface Props {
 
 
 export const TeamOverview: React.FC<Props> = ({ team }) => {
-  const { t }: { t: (key: string) => string } = useTranslation()
+  const { t }: { t: (key: string, options?: object) => string } = useTranslation()
   const leader = team.members.find((member) => (member.role == 0))
 
   return (

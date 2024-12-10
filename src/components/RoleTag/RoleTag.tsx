@@ -11,7 +11,7 @@ const colors: string[] = [
 ]
 
 export const RoleTag: React.FC<Props> = ({ role }) => {
-  const { t }: { t: (key: string) => string } = useTranslation()
+  const { t }: { t: (key: string, options?: object) => string } = useTranslation()
 
   const roles: string[] = [
     t("TEAM_MEMBER_ROLE.OWNER"),
