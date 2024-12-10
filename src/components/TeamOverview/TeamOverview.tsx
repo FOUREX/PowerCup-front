@@ -8,10 +8,11 @@ import {UserTag} from "../UserTag/UserTag.tsx";
 
 interface Props {
   team: Team
+  adminView?: boolean
 }
 
 
-export const TeamOverview: React.FC<Props> = ({ team }) => {
+export const TeamOverview: React.FC<Props> = ({ team, adminView }) => {
   const { t }: { t: (key: string, options?: object) => string } = useTranslation()
   const leader = team.members.find((member) => (member.role == 0))
 
@@ -26,10 +27,16 @@ export const TeamOverview: React.FC<Props> = ({ team }) => {
           <h1 className="m-0">{team.name}</h1>
 
         </div>
-        <Button
-          className="right-auto"
-          icon={<SettingOutlined />}
-        /></div>
+
+        {
+          adminView ? (
+            <Button
+              className="right-auto"
+              icon={<SettingOutlined />}
+            />
+          ) : (<></>)
+        }
+      </div>
 
       <Divider className="my-3" />
 
