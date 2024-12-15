@@ -1,7 +1,9 @@
 import "../../index.css";
 import "./style.css";
+import {InboxOutlined} from "@ant-design/icons";
 
-import { Button } from "antd";
+import {Badge, Button} from "antd";
+import * as React from "react";
 import {useTranslation} from "react-i18next";
 import {Link, useNavigate} from "react-router";
 import {CurrentUser} from "../../utils";
@@ -49,10 +51,18 @@ function NavBar() {
           <Link to="/matches">{t("NAVBAR.MATCHES")}</Link>
           <Link to="/tournaments">{t("NAVBAR.TOURNAMENTS")}</Link>
         </div>
-        <div className="flex gap-x-3" style={{ textAlign: "justify" }}>
+        <div className="flex gap-x-2" style={{ textAlign: "justify" }}>
           {is_logged ? (
             <>
               <span>{current_user?.name}</span>
+
+              <Badge count={0} size="small">
+                <Button
+                  type="default"
+                  icon={<InboxOutlined />}
+                />
+              </Badge>
+
               <Button
                 onClick={on_logout_button_click}
               >
