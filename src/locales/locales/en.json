@@ -1,4 +1,38 @@
 {
+  "COMPONENT": {
+    "TEAM_MEMBERS": {
+      "INVITE": "Invite",
+      "JOIN_REQUEST": {
+        "INVITATION": "Invitation",
+        "REQUEST": "Request"
+      },
+      "NOTIFICATION": {
+        "ERROR": "Failed to send invitation",
+        "INVITATION_CANCELLED": "Invitation cancelled",
+        "INVITATION_CANCEL_ERROR": "Unable to cancel invitation",
+        "INVITATION_CANCEL_MESSAGE": "The invitation for {{user_name}} has been revoked",
+        "INVITATION_SENT": "Invitation sent",
+        "INVITATION_SENT_DESCRIPTION": "The user will be automatically added to the team after accepting the invitation",
+        "REQUEST_ACCEPTED": "Join request approved",
+        "REQUEST_ACCEPTED_MESSAGE": "{{user_name}} is now a member of the team",
+        "REQUEST_ACCEPT_ERROR": "Something went wrong",
+        "REQUEST_REJECTED": "Join request rejected",
+        "REQUEST_REJECTED_ERROR": "The join request could not be rejected",
+        "REQUEST_REJECTED_MESSAGE": "Join request from {{user_name}} declined",
+        "WRONG_INPUT": "Failed to send invitation",
+        "WRONG_INPUT_DESCRIPTION": "Select a user from the list"
+      },
+      "NO_JOIN_REQUESTS": "There are currently no invitations/requests to join",
+      "USER": "User"
+    },
+    "TEAM_OVERVIEW": {
+      "NOTIFICATION": {
+        "ERROR": "The request could not be sent",
+        "SUCCESS": "Request sent successfully",
+        "SUCCESS_DESCRIPTION": "You will be automatically added to the team after the request is approved"
+      }
+    }
+  },
   "NAVBAR": {
     "LOGIN": "Login",
     "LOGOUT": "Logout",

@@ -1,4 +1,38 @@
 {
+  "COMPONENT": {
+    "TEAM_MEMBERS": {
+      "INVITE": "Запросити",
+      "JOIN_REQUEST": {
+        "INVITATION": "Запрошення",
+        "REQUEST": "Запит"
+      },
+      "NOTIFICATION": {
+        "ERROR": "Не вдалося відправити запрошення",
+        "INVITATION_CANCELLED": "Запрошення відмінено",
+        "INVITATION_CANCEL_ERROR": "Не вдалося відмінити запрошення",
+        "INVITATION_CANCEL_MESSAGE": "Запрошення для {{user_name}} відмінено",
+        "INVITATION_SENT": "Запрошення відправлено",
+        "INVITATION_SENT_DESCRIPTION": "Користувач буде автоматично доданий до команди після прийняття запрошення",
+        "REQUEST_ACCEPTED": "Запит на приєднання схвалено",
+        "REQUEST_ACCEPTED_MESSAGE": "Тепер {{user_name}} є учасником команди",
+        "REQUEST_ACCEPT_ERROR": "Не вдалося схвалити запит на приєднання",
+        "REQUEST_REJECTED": "Запит на приєднання відхилено",
+        "REQUEST_REJECTED_ERROR": "Не вдалося відхилити запит на приєднання",
+        "REQUEST_REJECTED_MESSAGE": "Відхилено запит на приєдання від {{user_name}}",
+        "WRONG_INPUT": "Не вдалося відправити запрошення",
+        "WRONG_INPUT_DESCRIPTION": "Виберіть користувача зі списку"
+      },
+      "NO_JOIN_REQUESTS": "Наразі немає запрошень/запитів на приєднання",
+      "USER": "Користувач"
+    },
+    "TEAM_OVERVIEW": {
+      "NOTIFICATION": {
+        "ERROR": "Не вдалося відправити запит",
+        "SUCCESS": "Запит успішно відправлено",
+        "SUCCESS_DESCRIPTION": "Ви будете автоматично додані до команди після схвалення запиту"
+      }
+    }
+  },
   "NAVBAR": {
     "LOGIN": "Увійти",
     "LOGOUT": "Вийти",
