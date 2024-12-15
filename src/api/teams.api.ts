@@ -1,5 +1,5 @@
-import { HttpStatusCode } from "axios";
-import {CreateTeam, Team} from "./types.ts";
+import axios, {AxiosRequestConfig, HttpStatusCode} from "axios";
+import {AcceptRequest, CancelInvite, CreateTeam, RejectRequest, SendInvite, SendRequest, Team} from "./types.ts";
 
 import {instance} from "./base.api.ts";
 
@@ -13,10 +13,11 @@ export const fetchTeams = async (): Promise<Array<Team>> => {
   return response.data.map((team: Team) => ({
     id: team.id,
     name: team.name,
+    avatar_url: team.avatar_url,
     members: team.members,
+    join_requests: team.join_requests
   }))
 }
-
 
 export const createTeam = async (data: CreateTeam): Promise<Team> => {
   const response = await instance.post<Team>("/team", data);
@@ -28,6 +29,50 @@ export const createTeam = async (data: CreateTeam): Promise<Team> => {
   return {
     id: response.data.id,
     name: response.data.name,
+    avatar_url: response.data.avatar_url,
     members: response.data.members,
+    join_requests: response.data.join_requests
+  }
+}
+
+export const sendJoinInvite = async (data: SendInvite) => {
+  const response = await instance.post<Team>("/team/join/invite", data);
+
+  if (response.status !== HttpStatusCode.NoContent) {
+    throw new Error(response.data.detail)
+  }
+}
+
+export const cancelJoinInvite = async (data: CancelInvite) => {
+  // noinspection JSAnnotator
+  const response = await instance.delete<Team>("/team/join/invite", { data: data });
+
+  if (response.status !== HttpStatusCode.NoContent) {
+    throw new Error(response.data.detail)
+  }
+}
+
+export const sendJoinRequest = async (data: SendRequest) => {
+  const response = await instance.post("/team/join/request", data);
+
+  if (response.status !== HttpStatusCode.NoContent) {
+    throw new Error(response.data.detail)
+  }
+}
+
+export const acceptJoinRequest = async (data: AcceptRequest) => {
+  const response = await instance.patch("/team/join/request", data);
+
+  if (response.status !== HttpStatusCode.NoContent) {
+    throw new Error(response.data.detail)
+  }
+}
+
+export const rejectJoinRequest = async (data: RejectRequest) => {
+  // noinspection JSAnnotator
+  const response = await instance.delete("/team/join/request", { data: data });
+
+  if (response.status !== HttpStatusCode.NoContent) {
+    throw new Error(response.data.detail)
   }
 }
