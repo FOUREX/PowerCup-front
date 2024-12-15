@@ -1,7 +1,12 @@
-import {useCallback, useEffect, useRef, useState} from "react";
-import {useTranslation} from "react-i18next";
+import {
+  EditOutlined,
+  PlusOutlined,
+  TeamOutlined,
+  UsergroupAddOutlined,
+} from "@ant-design/icons";
 
 import {
+  Badge,
   Button,
   Collapse,
   Form,
@@ -10,191 +15,234 @@ import {
   Menu,
   MenuProps,
   Modal,
+  notification,
   Spin,
-  notification
 } from "antd";
 import MenuItem from "antd/es/menu/MenuItem";
+
+import { createTeam, fetchTeams } from "api";
 import {
-  UsergroupAddOutlined,
-  EditOutlined,
-  TeamOutlined,
-  PlusOutlined,
-  SettingOutlined,
-  UserAddOutlined
-} from "@ant-design/icons";
+  Team,
+  TeamJoinRequestType,
+  TeamMember,
+  TeamMemberRole,
+  User,
+} from "api/types";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router";
+import { CurrentUser } from "utils";
+import { TeamMembers, TeamOverview } from "../../components";
 
-import {fetchTeams, createTeam} from "api";
-import {Team, TeamMember, User} from "api/types";
-import {useLocation, useSearchParams} from "react-router";
-import {CurrentUser} from "utils";
-import {TeamMembers, TeamOverview} from "../../components";
+import "./style.css";
 
-import "./style.css"
-
-
-type MenuItem = Required<MenuProps>['items'][number];
-type State = null | "view" | "edit" | "create"
+type MenuItem = Required<MenuProps>["items"][number];
+type State = null | "view" | "edit" | "create";
 type CreateTeamFieldType = {
   name: string;
-  members: []
+  members: [];
 };
 
-const icons: {[key in State]} = {
+const icons: { [key in State] } = {
   view: <TeamOutlined />,
   edit: <EditOutlined />,
   create: <UsergroupAddOutlined />,
-  null: null
-}
+  null: null,
+};
 
 export const TeamsPage = () => {
-  const { t }: { t: (key: string, options?: object) => string } = useTranslation()
+  const { t }: { t: (key: string, options?: object) => string } =
+    useTranslation();
 
-  const [searchParams, setSearchParams] = useSearchParams()
-  const urlTeamId = searchParams.get("team_id")
-  const selectedFromMenu = useRef<boolean>(false)  // Супер мега костиль щоб не викликати перерендер
-                                                                    // при виборі команди через меню
-  const [api, contextHolder] = notification.useNotification()
-  const currentUser: User | undefined = CurrentUser.get()
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlTeamId = searchParams.get("team_id");
+  const selectedFromMenu = useRef<boolean>(false); // Супер мега костиль щоб не викликати перерендер
+  // при виборі команди через меню
+  const [api, contextHolder] = notification.useNotification();
+  const currentUser: User | undefined = CurrentUser.get();
 
-  const teamsFetchedRef = useRef<boolean>(false)
+  const teamsFetchedRef = useRef<boolean>(false);
 
-  const [teamCreate, setTeamCreate] = useState<boolean>(false)
-  const [teamCreating, setTeamCreating] = useState<boolean>(false)
+  const [teamCreate, setTeamCreate] = useState<boolean>(false);
+  const [teamCreating, setTeamCreating] = useState<boolean>(false);
 
-  const [teams, setTeams] = useState<Team[] | undefined>(undefined)
-  const [newTeams, setNewTeams] = useState<Team[] | undefined>(undefined)
-  const [items, setItems] = useState<MenuItem[] | undefined>(undefined)
-  const [selectedKey, setSelectedKey] = useState<string>()
+  const [teams, setTeams] = useState<Team[] | undefined>(undefined);
+  const [newTeams, setNewTeams] = useState<Team[] | undefined>(undefined);
+  const [items, setItems] = useState<MenuItem[] | undefined>(undefined);
+  const [selectedKey, setSelectedKey] = useState<string>();
 
-  const [currentTeam, setCurrentTeam] = useState<Team | undefined>(undefined)
-  const [isTeamAdmin, setIsTeamAdmin] = useState<boolean>(false)
+  const [currentTeam, setCurrentTeam] = useState<Team | undefined>(undefined);
+  const [isTeamAdmin, setIsTeamAdmin] = useState<boolean>(false);
 
-  const createMenuItems = useCallback((teams: Team[]) => {
-    if (currentUser) {
-      setItems([{
-        key: "my_teams",
-        label: t("PAGES.TEAMS.MY_TEAMS"),
-        type: "group",
-        children: teams.map((team: Team) => {
-          if (team.members.find((member: TeamMember) => member.user.id === currentUser.id)) {
-            return{key: -team.id, label: team.name}
-          }
-        })
-      }])
-    }
+  const createMenuItems = useCallback(
+    (teams: Team[]) => {
+      if (currentUser) {
+        setItems([
+          {
+            key: "my_teams",
+            label: t("PAGES.TEAMS.MY_TEAMS"),
+            type: "group",
+            children: teams.map((team: Team) => {
+              if (
+                team.members.find(
+                  (member: TeamMember) => member.user.id === currentUser.id,
+                )
+              ) {
+                return {
+                  key: -team.id,
+                  label: (
+                    <Badge
+                      size="small"
+                      offset={[10, 0]}
+                      count={
+                        team.members.some(
+                          (member) => member.role <= TeamMemberRole.Admin,
+                        )
+                          ? team.join_requests.filter(
+                            (request) =>
+                              request.type == TeamJoinRequestType.Request,
+                            ).length
+                          : 0
+                      }
+                    >
+                      {team.name}
+                    </Badge>
+                  ),
+                };
+              }
+            }),
+          },
+        ]);
+      }
 
-    setItems((prevItems) => [...(Array.isArray(prevItems) ? prevItems : []), {
-      key: "all_teams",
-      label: t("PAGES.TEAMS.ALL_TEAMS"),
-      type: "group",
-      children: teams.map((team: Team) => {
-        return{key: team.id, label: team.name}
-      })
-    }])
-  }, [currentUser, t])
+      setItems((prevItems) => [
+        ...(Array.isArray(prevItems) ? prevItems : []),
+        {
+          key: "all_teams",
+          label: t("PAGES.TEAMS.ALL_TEAMS"),
+          type: "group",
+          children: teams.map((team: Team) => {
+            return { key: team.id, label: team.name };
+          }),
+        },
+      ]);
+    },
+    [currentUser, t],
+  );
 
-  const findTeam = useCallback((key): Team | undefined => {
-    if (!teams) return undefined
-    return teams.find(team => team.id === Math.abs(Number(key)))
-  }, [teams])
+  const findTeam = useCallback(
+    (key): Team | undefined => {
+      if (!teams) return undefined;
+      return teams.find((team) => team.id === Math.abs(Number(key)));
+    },
+    [teams],
+  );
 
   useEffect(() => {
     if (!teamsFetchedRef.current) {
-      teamsFetchedRef.current = true
+      teamsFetchedRef.current = true;
 
-      fetchTeams().then(((teams: Team[]) => {
-        setTeams(teams)
-        createMenuItems(teams)
-      }))
+      fetchTeams().then((teams: Team[]) => {
+        setTeams(teams);
+        createMenuItems(teams);
+      });
     }
-  }, [createMenuItems])
+  }, [createMenuItems]);
 
   useEffect(() => {
     if (newTeams) {
-      createMenuItems(newTeams)
-      setTeams(newTeams)
-      setNewTeams(undefined)
+      createMenuItems(newTeams);
+      setTeams(newTeams);
+      setNewTeams(undefined);
     }
   }, [createMenuItems, newTeams]);
 
-  const onTeamCreate: FormProps<CreateTeamFieldType>["onFinish"] = async (values) => {
-    setTeamCreating(true)
-    createTeam(values).then(
-      createdTeam => {
-        setNewTeams([...(Array.isArray(teams) ? teams : []), createdTeam])
-        setCurrentTeam(createdTeam)
-        setTeamCreate(false)
-        setTeamCreating(false)
-        setIsTeamAdmin(true)
-        setSelectedKey((-createdTeam.id).toString())
+  const onTeamCreate: FormProps<CreateTeamFieldType>["onFinish"] = async (
+    values,
+  ) => {
+    setTeamCreating(true);
+    createTeam(values)
+      .then((createdTeam) => {
+        setNewTeams([...(Array.isArray(teams) ? teams : []), createdTeam]);
+        setCurrentTeam(createdTeam);
+        setTeamCreate(false);
+        setTeamCreating(false);
+        setIsTeamAdmin(true);
+        setSelectedKey((-createdTeam.id).toString());
 
-        const params = new URLSearchParams(searchParams)
-        params.set("team_id", createdTeam.id.toString())
+        const params = new URLSearchParams(searchParams);
+        params.set("team_id", createdTeam.id.toString());
 
-        setSearchParams(params)
+        setSearchParams(params);
 
-        selectedFromMenu.current = true
+        selectedFromMenu.current = true;
 
         api.success({
           message: t("NOTIFICATION.SUCCESS"),
-          description: t("TEAMS.NOTIFICATION.TEAM_CREATED_SUCCESS", { team_name: createdTeam.name }),
-          placement: "bottomRight"
+          description: t("TEAMS.NOTIFICATION.TEAM_CREATED_SUCCESS", {
+            team_name: createdTeam.name,
+          }),
+          placement: "bottomRight",
         });
-      }
-    ).catch(reason => {
-      setTeamCreating(false)
-      api.error({
-        message: t("NOTIFICATION.SUCCESS"),
-        description: reason.message,
-        placement: "bottomRight"
       })
-    })
-  }
+      .catch((reason) => {
+        setTeamCreating(false);
+        api.error({
+          message: t("NOTIFICATION.SUCCESS"),
+          description: reason.message,
+          placement: "bottomRight",
+        });
+      });
+  };
 
   const onTeamSelected = (key) => {
-    const team: Team | undefined = findTeam(key.key)
-    setCurrentTeam(team)
+    const team: Team | undefined = findTeam(key.key);
+    setCurrentTeam(team);
 
-    if (!team) return
+    if (!team) return;
 
-    const params = new URLSearchParams(searchParams)
-    params.set("team_id", team.id.toString())
+    const params = new URLSearchParams(searchParams);
+    params.set("team_id", team.id.toString());
 
-    setSearchParams(params)
+    setSearchParams(params);
 
-    selectedFromMenu.current = true
+    selectedFromMenu.current = true;
 
     if (
-      currentUser
-      && team.members.find(member => member.user.id == currentUser.id && member.role <= 1)
+      currentUser &&
+      team.members.find(
+        (member) => member.user.id == currentUser.id && member.role <= 1,
+      )
     ) {
-      setIsTeamAdmin(true)
+      setIsTeamAdmin(true);
     } else {
-      setIsTeamAdmin(false)
+      setIsTeamAdmin(false);
     }
-  }
+  };
 
-  useEffect(() => {  // Я забороняю вам читати цей код.
+  useEffect(() => {
+    // Я забороняю вам читати цей код.
     if (selectedFromMenu.current) {
-      selectedFromMenu.current = false
-      return
+      selectedFromMenu.current = false;
+      return;
     }
 
     if (urlTeamId) {
-      const team = findTeam(urlTeamId)
-      const member = team && currentUser
-        ? team.members.find(member => member.user.id == currentUser.id)
-        : undefined
-      const isAdmin = member?.role <= 1
+      const team = findTeam(urlTeamId);
+      const member =
+        team && currentUser
+          ? team.members.find((member) => member.user.id == currentUser.id)
+          : undefined;
+      const isAdmin = member?.role <= 1;
 
       if (team) {
-        setCurrentTeam(team)
-        setSelectedKey(member ? (-team.id).toString() : team.id.toString())
+        setCurrentTeam(team);
+        setSelectedKey(member ? (-team.id).toString() : team.id.toString());
 
         if (isAdmin) {
-          setIsTeamAdmin(true)
+          setIsTeamAdmin(true);
         } else {
-          setIsTeamAdmin(false)
+          setIsTeamAdmin(false);
         }
       }
     }
@@ -209,7 +257,7 @@ export const TeamsPage = () => {
         title={
           <div className="flex gap-2">
             {icons.create}
-            <span>{t('PAGES.TEAMS.CREATE_TEAM')}</span>
+            <span>{t("PAGES.TEAMS.CREATE_TEAM")}</span>
           </div>
         }
         footer=""
@@ -244,13 +292,11 @@ export const TeamsPage = () => {
             </Button>
           </Form.Item>
 
-
           <Form.Item label={null}>
             {teamCreating ? (
               <div className="w-full flex">
                 <Spin className="mx-auto" size="default" />
               </div>
-
             ) : (
               <Button className="w-full" type="primary" htmlType="submit">
                 {t("PAGES.TEAMS.CREATE_TEAM")}
@@ -280,7 +326,12 @@ export const TeamsPage = () => {
           </Button>
 
           {items ? (
-            <Menu items={items} selectedKeys={[selectedKey]} onClick={onTeamSelected} className="w-full" />
+            <Menu
+              items={items}
+              selectedKeys={[selectedKey]}
+              onClick={onTeamSelected}
+              className="w-full"
+            />
           ) : (
             <Spin size="large" />
           )}
@@ -295,7 +346,7 @@ export const TeamsPage = () => {
                 {
                   key: "overview",
                   label: t("PAGES.TEAMS.OVERVIEW"),
-                  children: <TeamOverview team={currentTeam} adminView={isTeamAdmin} />,
+                  children: <TeamOverview team={currentTeam} />,
                 },
               ]}
             />
@@ -307,7 +358,7 @@ export const TeamsPage = () => {
                 {
                   key: "members",
                   label: t("PAGES.TEAMS.MEMBERS"),
-                  children: <TeamMembers members={currentTeam.members} adminView={isTeamAdmin} />,
+                  children: <TeamMembers team={currentTeam} />,
                 },
               ]}
             />
@@ -343,4 +394,4 @@ export const TeamsPage = () => {
       </div>
     </>
   );
-}
+};
