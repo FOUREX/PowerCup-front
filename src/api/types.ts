@@ -46,6 +46,11 @@ export interface Team {
   join_requests: TeamJoinRequest[]
 }
 
+export interface TeamInvitation {
+  team: Team
+  type: TeamJoinRequestType
+}
+
 export interface CreateTeam {
   name: string
   members: {user_id: number, role: number}[]
@@ -54,6 +59,14 @@ export interface CreateTeam {
 export interface SendInvite {
   team_id: number
   user_id: number
+}
+
+export interface AcceptInvite {
+  team_id: number
+}
+
+export interface RejectInvite {
+  team_id: number
 }
 
 export interface CancelInvite {
