@@ -1,5 +1,15 @@
 {
   "COMPONENT": {
+    "INVITATIONS_LIST": {
+      "NOTIFICATION": {
+        "INVITATION_ACCEPTED": "The invitation to the team has been accepted",
+        "INVITATION_ACCEPTED_DESCRIPTION": "You are now a member of {{team_name}}",
+        "INVITATION_ACCEPTED_ERROR": "Failed to accept team invitation",
+        "INVITATION_REJECTED": "The invitation to the team was rejected",
+        "INVITATION_REJECTED_DESCRIPTION": "Invitation from team {{team_name}} declined",
+        "INVITATION_REJECTED_ERROR": "Failed to decline invitation"
+      }
+    },
     "TEAM_MEMBERS": {
       "INVITE": "Invite",
       "JOIN_REQUEST": {

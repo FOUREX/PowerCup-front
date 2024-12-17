@@ -1,5 +1,15 @@
 {
   "COMPONENT": {
+    "INVITATIONS_LIST": {
+      "NOTIFICATION": {
+        "INVITATION_ACCEPTED": "Запрошення в команду прийнято",
+        "INVITATION_ACCEPTED_DESCRIPTION": "Тепер ви є учасником команди {{team_name}}",
+        "INVITATION_ACCEPTED_ERROR": "Не вдалося прийняти запрошення в команду",
+        "INVITATION_REJECTED": "Запрошення в команду відхилено",
+        "INVITATION_REJECTED_DESCRIPTION": "Відхилено запрошення від команди {{team_name}}",
+        "INVITATION_REJECTED_ERROR": "Не вдалося відхилити запрошення"
+      }
+    },
     "TEAM_MEMBERS": {
       "INVITE": "Запросити",
       "JOIN_REQUEST": {
