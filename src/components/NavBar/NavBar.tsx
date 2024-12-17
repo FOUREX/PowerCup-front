@@ -2,11 +2,12 @@ import "../../index.css";
 import "./style.css";
 import {InboxOutlined} from "@ant-design/icons";
 
-import {Badge, Button} from "antd";
+import {Badge, Button, Popover} from "antd";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
 import {Link, useNavigate} from "react-router";
 import {CurrentUser} from "../../utils";
+import {InvitationsList} from "../InvitationsList/InvitationsList.tsx";
 
 
 function NavBar() {
@@ -29,45 +30,38 @@ function NavBar() {
           width: 1200,
           maxWidth: 1200,
           backgroundColor: "rgba(from var(--color-background-secondary) r g b / .1)",
-          backdropFilter: "blur(5px)"
+          backdropFilter: "blur(5px)",
         }}
       >
         <div>
           <Link to="/">
-            <b>
-              Power
-              <span
-                style={{
-                  color: "var(--color-primary)",
-                }}
-              >
-                Cup
-              </span>
-            </b>
+            <b>Power<span style={{color: "var(--color-primary)"}}>Cup</span></b>
           </Link>
         </div>
+
         <div className="flex gap-3">
           <Link to="/teams">{t("NAVBAR.TEAMS")}</Link>
           <Link to="/matches">{t("NAVBAR.MATCHES")}</Link>
           <Link to="/tournaments">{t("NAVBAR.TOURNAMENTS")}</Link>
         </div>
+
         <div className="flex gap-x-2" style={{ textAlign: "justify" }}>
           {is_logged ? (
             <>
               <span>{current_user?.name}</span>
 
-              <Badge count={0} size="small">
-                <Button
-                  type="default"
-                  icon={<InboxOutlined />}
-                />
-              </Badge>
-
-              <Button
-                onClick={on_logout_button_click}
+              <Popover
+                content={<InvitationsList />}
+                overlayStyle={{minWidth: 400}}
+                placement="bottomRight"
+                trigger="click"
               >
-                {t("NAVBAR.LOGOUT")}
-              </Button>
+                <Badge count={0} size="small">
+                  <Button type="default" icon={<InboxOutlined />} />
+                </Badge>
+              </Popover>
+
+              <Button onClick={on_logout_button_click}>{t("NAVBAR.LOGOUT")}</Button>
             </>
           ) : (
             <>
