@@ -1,5 +1,4 @@
 import { HttpStatusCode } from "axios";
-import {use} from "i18next";
 
 import {User} from "./types.ts";
 import {instance} from "./base.api.ts";
