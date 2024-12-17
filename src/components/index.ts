@@ -6,5 +6,16 @@ import {RoleTag} from "./RoleTag/RoleTag.tsx";
 import {TeamMembers} from "./TeamMembers/TeamMembers.tsx";
 import {InvitationsList} from "./InvitationsList/InvitationsList.tsx";
 import {TeamTag} from "./TeamTag/TeamTag.tsx";
+import {Content} from "./Content/Content.tsx";
 
-export { NavBar, Footer, TeamOverview, UserTag, RoleTag, TeamMembers, InvitationsList, TeamTag };
+export {
+  NavBar,
+  Footer,
+  TeamOverview,
+  UserTag,
+  RoleTag,
+  TeamMembers,
+  InvitationsList,
+  TeamTag,
+  Content
+};
