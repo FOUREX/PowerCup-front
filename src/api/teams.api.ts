@@ -1,5 +1,15 @@
-import axios, {AxiosRequestConfig, HttpStatusCode} from "axios";
-import {AcceptRequest, CancelInvite, CreateTeam, RejectRequest, SendInvite, SendRequest, Team} from "./types.ts";
+import {HttpStatusCode} from "axios";
+import {
+  AcceptInvite,
+  AcceptRequest,
+  CancelInvite,
+  CreateTeam, RejectInvite,
+  RejectRequest,
+  SendInvite,
+  SendRequest,
+  Team, TeamInvitation,
+  TeamJoinRequestType
+} from "./types.ts";
 
 import {instance} from "./base.api.ts";
 
@@ -35,8 +45,40 @@ export const createTeam = async (data: CreateTeam): Promise<Team> => {
   }
 }
 
+export const fetchInvitations = async (): Promise<TeamInvitation[]> => {
+  const response = await instance.get<TeamInvitation[]>("/team/join/invitations");
+
+  if (response.status !== HttpStatusCode.Ok) {
+    throw new Error(response.data.detail)
+  }
+
+  return response.data
+    .filter((invitation: TeamInvitation) => invitation.type == TeamJoinRequestType.Invite)
+    .map((invitation : TeamInvitation) => ({
+      team: invitation.team,
+      type: invitation.type
+    }))
+}
+
 export const sendJoinInvite = async (data: SendInvite) => {
-  const response = await instance.post<Team>("/team/join/invite", data);
+  const response = await instance.post("/team/join/invite", data);
+
+  if (response.status !== HttpStatusCode.NoContent) {
+    throw new Error(response.data.detail)
+  }
+}
+
+export const acceptJoinInvite = async (data: AcceptInvite) => {
+  const response = await instance.patch("/team/join/invite", data);
+
+  if (response.status !== HttpStatusCode.NoContent) {
+    throw new Error(response.data.detail)
+  }
+}
+
+export const rejectJoinInvite = async (data: RejectInvite) => {
+  // noinspection JSAnnotator
+  const response = await instance.delete("/team/join/invite", { data: data });
 
   if (response.status !== HttpStatusCode.NoContent) {
     throw new Error(response.data.detail)
