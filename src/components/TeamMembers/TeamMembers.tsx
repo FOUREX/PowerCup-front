@@ -25,7 +25,7 @@ import {
 import {ArgsProps} from "antd/es/notification";
 import { ColumnsType } from "antd/es/table";
 import * as React from "react";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import { useTranslation } from "react-i18next";
 import {useSearchParams} from "react-router";
 import {acceptJoinRequest, cancelJoinInvite, rejectJoinRequest, sendJoinInvite} from "../../api/teams.api.ts";
