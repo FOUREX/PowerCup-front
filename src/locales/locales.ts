@@ -6,7 +6,9 @@ import ua from "./locales/ua.json"
 
 type Locale = "en" | "ua";
 
-const getCurrentLocale = (): Locale => "ua";
+const getCurrentLocale = (): Locale => {
+  return localStorage.getItem("lng") as Locale
+};
 
 i18n
   .use(initReactI18next)
@@ -15,7 +17,7 @@ i18n
     fallbackLng: "en",
     resources: {
       en: { translation: en },
-      ua: { translatnion: ua },
+      ua: { translation: ua },
     },
     debug: true
   }).then()

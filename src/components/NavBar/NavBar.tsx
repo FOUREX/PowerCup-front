@@ -2,7 +2,9 @@ import "../../index.css";
 import "./style.css";
 import {InboxOutlined} from "@ant-design/icons";
 
-import {Badge, Button, Popover} from "antd";
+import {Badge, Button, Popover, Space} from "antd";
+import {Locale} from "antd/es/locale";
+import {useEffect, useState} from "react";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
 import {Link, useNavigate} from "react-router";
@@ -17,11 +19,28 @@ function NavBar() {
   const current_user = CurrentUser.get()
   const is_logged = current_user != undefined
 
+  const [selectedLanguage, setSelectedLanguage] = useState<Locale>()
+
   const on_logout_button_click = () => {
     CurrentUser.del()
     navigate("/")
   }
 
+  const setLng = (lng: string) => {
+    localStorage.setItem("lng", lng)
+    setSelectedLanguage(lng as Locale)
+    window.location.reload()
+  }
+
+  useEffect(() => {
+    if (!localStorage.getItem("lng")) {
+      localStorage.setItem("lng", "ua")
+    }
+
+    setSelectedLanguage(localStorage.getItem("lng") as Locale)
+  }, []);
+
+  // noinspection JSIncompatibleTypesComparison
   return (
     <header className="z-50 flex justify-center fixed w-full top-0 text-lg h-17 font-medium mb-28">
       <div
@@ -39,13 +58,27 @@ function NavBar() {
           </Link>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 w-28">
           <Link to="/teams">{t("NAVBAR.TEAMS")}</Link>
           <Link to="/matches">{t("NAVBAR.MATCHES")}</Link>
           <Link to="/tournaments">{t("NAVBAR.TOURNAMENTS")}</Link>
         </div>
 
         <div className="flex gap-x-2" style={{ textAlign: "justify" }}>
+          <Space.Compact className="">
+            <Button
+              type={selectedLanguage === "ua" ? "primary" : "default"}
+              onClick={() => setLng("ua")}
+            >
+              UA
+            </Button>
+            <Button
+              type={selectedLanguage === "en" ? "primary" : "default"}
+              onClick={() => setLng("en")}
+            >
+              EN
+            </Button>
+          </Space.Compact>
           {is_logged ? (
             <>
               <span>{current_user?.name}</span>
