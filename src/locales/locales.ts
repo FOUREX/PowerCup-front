@@ -15,7 +15,7 @@ i18n
     fallbackLng: "en",
     resources: {
       en: { translation: en },
-      ua: { translation: ua },
+      ua: { translatnion: ua },
     },
     debug: true
   }).then()
