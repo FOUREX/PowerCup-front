@@ -1,61 +1,62 @@
-import "./App.css";
+import {BrowserRouter as Router, Routes, Route, useNavigate} from "react-router";
 import {ConfigProvider, theme} from "antd";
 import {useEffect, useRef} from "react";
 import { HomePage, LoginPage, TeamsPage, MatchesPage, admin } from "./pages";
 import { Footer, NavBar } from "./components";
-import {Route, Routes, useNavigate} from "react-router";
-import {getMe} from "api";
-import {TournamentsPage} from "./pages/tournaments/TournamentsPage.tsx";
-import {CurrentUser} from "./utils";
+import { getMe } from "api";
+import { TournamentsPage } from "./pages/tournaments/TournamentsPage.tsx";
+import { CurrentUser } from "./utils";
 
 function getCssVariableValue(variableName: string) {
   return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
 }
 
 function App() {
-  const userFetched = useRef<boolean>(false)
-  const navigate = useNavigate()
+  const userFetched = useRef<boolean>(false);
+  const navigate = useNavigate();
 
   const checkAuth = async () => {
     if (!CurrentUser.get() || userFetched.current) {
-      return
+      return;
     }
 
-    userFetched.current = true
+    userFetched.current = true;
 
     try {
-      await getMe()
+      await getMe();
     } catch {
-      CurrentUser.del()
-      navigate("/")
+      CurrentUser.del();
+      navigate("/");
     }
-  }
+  };
 
   useEffect(() => {
-    checkAuth().then()
-  })
+    checkAuth().then();
+  });
 
   return (
-    <ConfigProvider
-      theme={{
-        algorithm: theme.darkAlgorithm,
-        token: {
-          colorPrimary: getCssVariableValue("--color-primary"),
-        },
-      }}
-    >
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/teams" element={<TeamsPage />} />
-        <Route path="/tournaments" element={<TournamentsPage />} />
-        <Route path="/matches" element={<MatchesPage />} />
-        <Route path="/admin/login" element={<admin.LoginAdminPage />} />
-        <Route path="/admin/dashboard" element={<admin.Dashboard />} />
-      </Routes>
-      <Footer />
-    </ConfigProvider>
+    <Router>
+      <ConfigProvider
+        theme={{
+          algorithm: theme.darkAlgorithm,
+          token: {
+            colorPrimary: getCssVariableValue("--color-primary"),
+          },
+        }}
+      >
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/teams" element={<TeamsPage />} />
+          <Route path="/tournaments" element={<TournamentsPage />} />
+          <Route path="/matches" element={<MatchesPage />} />
+          <Route path="/admin/login" element={<admin.LoginAdminPage />} />
+          <Route path="/admin/dashboard" element={<admin.Dashboard />} />
+        </Routes>
+        <Footer />
+      </ConfigProvider>
+    </Router>
   );
 }
 
