@@ -10,6 +10,12 @@ export enum TeamMemberRole {
   Reserved
 }
 
+export enum TournamentMemberStatus {
+  Pending,
+  Accepted,
+  Rejected
+}
+
 export interface LoginRequest {
   login: string
   password: string
@@ -86,4 +92,42 @@ export interface AcceptRequest {
 export interface RejectRequest {
   team_id: number
   user_id: number
+}
+
+export interface CreateGame {
+  name: string
+  short_name: string
+}
+
+export interface Game {
+  id: number
+  name: string
+  short_name: string
+}
+
+export interface TournamentMember {
+  team: Team
+  status: TournamentMemberStatus
+}
+
+export interface CreateTournament {
+  name: string
+  description: string | null
+  poster: File
+  game_id: number
+}
+
+export interface Tournament {
+  id: number
+  name: string
+  description: string | null
+  poster_url: string | null
+  status: number
+  game: Game
+  members: TournamentMember[]
+}
+
+export interface AddTournamentMember {
+  tournament_id: number
+  team_id: number
 }

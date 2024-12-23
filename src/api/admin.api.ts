@@ -3,9 +3,8 @@ import { HttpStatusCode } from "axios";
 import { LoginRequest, User } from "./types.ts";
 import {instance} from "./base.api.ts";
 
-
 export const login = async (data: LoginRequest): Promise<User> => {
-  const response = await instance.post("/auth/login", {
+  const response = await instance.post("/admin/login", {
     name: data.login,
     password: data.password,
   });

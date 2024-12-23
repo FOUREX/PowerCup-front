@@ -7,7 +7,7 @@ type Props = {
 export const Content: React.FC<Props> = ({children}) => {
   return (
     <div
-      className="content flex box-border gap-3"
+      className="content flex flex-col box-border gap-3"
       style={{
         margin: "0 auto",
         paddingTop: "68px",

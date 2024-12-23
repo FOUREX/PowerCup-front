@@ -7,6 +7,8 @@ import {TeamMembers} from "./TeamMembers/TeamMembers.tsx";
 import {InvitationsList} from "./InvitationsList/InvitationsList.tsx";
 import {TeamTag} from "./TeamTag/TeamTag.tsx";
 import {Content} from "./Content/Content.tsx";
+import {TournamentCard} from "./TournamentCard/TournamentCard.tsx";
+import {GameTag} from "./GameTag/GameTag.tsx";
 
 export {
   NavBar,
@@ -17,5 +19,7 @@ export {
   TeamMembers,
   InvitationsList,
   TeamTag,
-  Content
+  Content,
+  TournamentCard,
+  GameTag
 };

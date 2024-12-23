@@ -1,10 +1,11 @@
 import "./App.css";
 import {ConfigProvider, theme} from "antd";
 import {useEffect, useRef} from "react";
-import { HomePage, LoginPage, TeamsPage, MatchesPage } from "./pages";
+import { HomePage, LoginPage, TeamsPage, MatchesPage, admin } from "./pages";
 import { Footer, NavBar } from "./components";
 import {Route, Routes, useNavigate} from "react-router";
 import {getMe} from "api";
+import {TournamentsPage} from "./pages/tournaments/TournamentsPage.tsx";
 import {CurrentUser} from "./utils";
 
 function getCssVariableValue(variableName: string) {
@@ -48,7 +49,10 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/teams" element={<TeamsPage />} />
+        <Route path="/tournaments" element={<TournamentsPage />} />
         <Route path="/matches" element={<MatchesPage />} />
+        <Route path="/admin/login" element={<admin.LoginAdminPage />} />
+        <Route path="/admin/dashboard" element={<admin.Dashboard />} />
       </Routes>
       <Footer />
     </ConfigProvider>

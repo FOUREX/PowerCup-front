@@ -1,0 +1,9 @@
+:where(.css-dev-only-do-not-override-hpdc39).ant-card .ant-card-body::before {
+    display: none;
+    content: "Vertel ya vashe do-not-override";
+}
+
+:where(.css-dev-only-do-not-override-hpdc39).ant-card .ant-card-body::after {
+    display: none;
+    content: "Vertel ya vashe do-not-override";
+}

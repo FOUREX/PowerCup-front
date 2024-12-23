@@ -29,6 +29,22 @@ export const fetchTeams = async (): Promise<Array<Team>> => {
   }))
 }
 
+export const fetchMyTeams = async (): Promise<Array<Team>> => {
+  const response = await instance.get<Team[]>("/teams/my");
+
+  if (response.status !== HttpStatusCode.Ok) {
+    throw new Error(response.data.detail)
+  }
+
+  return response.data.map((team: Team) => ({
+    id: team.id,
+    name: team.name,
+    avatar_url: team.avatar_url,
+    members: team.members,
+    join_requests: team.join_requests
+  }))
+}
+
 export const createTeam = async (data: CreateTeam): Promise<Team> => {
   const response = await instance.post<Team>("/team", data);
 
