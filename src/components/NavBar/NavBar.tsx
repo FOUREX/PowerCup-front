@@ -65,21 +65,7 @@ function NavBar() {
         </div>
 
         <div className="flex gap-x-2" style={{ textAlign: "justify" }}>
-          <Space.Compact className="">
-            <Button
-              type={selectedLanguage === "ua" ? "primary" : "default"}
-              onClick={() => setLng("ua")}
-            >
-              UA
-            </Button>
-            <Button
-              type={selectedLanguage === "en" ? "primary" : "default"}
-              onClick={() => setLng("en")}
-            >
-              EN
-            </Button>
-          </Space.Compact>
-          {is_logged ? (
+                    {is_logged ? (
             <>
               <span>{current_user?.name}</span>
 
@@ -94,10 +80,40 @@ function NavBar() {
                 </Badge>
               </Popover>
 
+              <Space.Compact className="">
+                <Button
+                  type={selectedLanguage === "ua" ? "primary" : "default"}
+                  onClick={() => setLng("ua")}
+                >
+                  UA
+                </Button>
+                <Button
+                  type={selectedLanguage === "en" ? "primary" : "default"}
+                  onClick={() => setLng("en")}
+                >
+                  EN
+                </Button>
+              </Space.Compact>
+
               <Button onClick={on_logout_button_click}>{t("NAVBAR.LOGOUT")}</Button>
             </>
           ) : (
             <>
+              <Space.Compact className="">
+                <Button
+                  type={selectedLanguage === "ua" ? "primary" : "default"}
+                  onClick={() => setLng("ua")}
+                >
+                  UA
+                </Button>
+                <Button
+                  type={selectedLanguage === "en" ? "primary" : "default"}
+                  onClick={() => setLng("en")}
+                >
+                  EN
+                </Button>
+              </Space.Compact>
+
               <Link to="/login">
                 <Button>{t("NAVBAR.LOGIN")}</Button>
               </Link>
