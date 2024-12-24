@@ -71,6 +71,17 @@
       "PASSWORD": "Password",
       "USERNAME": "Username"
     },
+    "REGISTER": {
+      "CONFIRM_PASSWORD": "Repeat the password",
+      "NOTIFICATION": {
+        "REGISTRATION_FAILED": "Registration failed",
+        "REGISTRATION_SUCCESS": "Registratioin success",
+        "REGISTRATION_SUCCESS_MESSAGE": "User {{user_name}} is registered"
+      },
+      "PASSWORDS_MUST_MATCH": "Passwords do not match",
+      "REGISTER": "Register",
+      "REGISTRATION": "Registration"
+    },
     "TEAMS": {
       "ADD_MEMBER": "Add member",
       "ALL_TEAMS": "All teams",

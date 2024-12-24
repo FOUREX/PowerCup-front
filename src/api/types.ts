@@ -21,6 +21,11 @@ export interface LoginRequest {
   password: string
 }
 
+export interface RegisterData {
+  login: string
+  password: string
+}
+
 export interface PersonalData {
   first_name: string | null
   last_name: string | null

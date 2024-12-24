@@ -1,7 +1,7 @@
 import "./App.css";
 import {ConfigProvider, theme} from "antd";
 import {useEffect, useRef} from "react";
-import { HomePage, LoginPage, TeamsPage, MatchesPage, admin } from "./pages";
+import {HomePage, LoginPage, TeamsPage, MatchesPage, admin, RegisterPage} from "./pages";
 import { Footer, NavBar } from "./components";
 import {Route, Routes, useNavigate} from "react-router";
 import {getMe} from "api";
@@ -48,6 +48,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/teams" element={<TeamsPage />} />
         <Route path="/tournaments" element={<TournamentsPage />} />
         <Route path="/matches" element={<MatchesPage />} />

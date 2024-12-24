@@ -71,6 +71,17 @@
       "PASSWORD": "Пароль",
       "USERNAME": "Логін"
     },
+    "REGISTER": {
+      "CONFIRM_PASSWORD": "Повторіть пароль",
+      "NOTIFICATION": {
+        "REGISTRATION_FAILED": "Не вдалося зареєструвати користувача",
+        "REGISTRATION_SUCCESS": "Успішна реєстрація",
+        "REGISTRATION_SUCCESS_MESSAGE": "Користувач {{user_name}} зареєстрований"
+      },
+      "PASSWORDS_MUST_MATCH": "Паролі не збігаються",
+      "REGISTER": "Зареєструваатися",
+      "REGISTRATION": "Реєстрація"
+    },
     "TEAMS": {
       "ADD_MEMBER": "Додати учасника",
       "ALL_TEAMS": "Всі команди",
