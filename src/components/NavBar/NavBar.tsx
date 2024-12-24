@@ -98,7 +98,7 @@ function NavBar() {
                 </Button>
               </Space.Compact>
 
-              <Button onClick={on_logout_button_click}>
+              <Button className="links" onClick={on_logout_button_click}>
                 {t("NAVBAR.LOGOUT")}
               </Button>
             </>
@@ -138,7 +138,11 @@ function NavBar() {
                   <Link to="/matches">{t("NAVBAR.MATCHES")}</Link>
                   <Link to="/tournaments">{t("NAVBAR.TOURNAMENTS")}</Link>
 
-                  {!is_logged ? (
+                  {is_logged ? (
+                    <Button onClick={on_logout_button_click}>
+                      {t("NAVBAR.LOGOUT")}
+                    </Button>
+                    ) : (
                     <Space.Compact>
                       <Link to="/login">
                         <Button>{t("NAVBAR.LOGIN")}</Button>
@@ -148,7 +152,7 @@ function NavBar() {
                         <Button type="primary">{t("NAVBAR.REGISTER")}</Button>
                       </Link>
                     </Space.Compact>
-                  ) : (<></>)}
+                  )}
                 </div>
               </div>
             }
