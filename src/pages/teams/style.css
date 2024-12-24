@@ -1,3 +1,21 @@
 .modal-background-blur {
     backdrop-filter: blur(2px);
 }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
+@media (max-width: 650px) {
+    .hide {
+        display: flex;
+    }
+
+    .show {
+        display: none;
+    }
+}

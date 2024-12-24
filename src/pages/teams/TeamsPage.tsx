@@ -3,6 +3,7 @@ import {
   PlusOutlined,
   TeamOutlined,
   UsergroupAddOutlined,
+  LeftOutlined
 } from "@ant-design/icons";
 
 import {
@@ -28,6 +29,7 @@ import {
   TeamMemberRole,
   User,
 } from "api/types";
+import {use} from "i18next";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
@@ -73,6 +75,8 @@ export const TeamsPage = () => {
 
   const [currentTeam, setCurrentTeam] = useState<Team | undefined>(undefined);
   const [isTeamAdmin, setIsTeamAdmin] = useState<boolean>(false);
+
+  const [hideMenu, setHideMenu] = useState<boolean>(false)
 
   const createMenuItems = useCallback(
     (teams: Team[]) => {
@@ -198,6 +202,7 @@ export const TeamsPage = () => {
   const onTeamSelected = (key) => {
     const team: Team | undefined = findTeam(key.key);
     setCurrentTeam(team);
+    setSelectedKey(team?.id.toString())
 
     if (!team) return;
 
@@ -306,82 +311,97 @@ export const TeamsPage = () => {
         </Form>
       </Modal>
       <div className="content flex box-border gap-3">
-        <div className="flex flex-col max-w-56 w-full gap-3">
-          <Button
-            type="primary"
-            disabled={currentUser == undefined}
-            size="large"
-            icon={<UsergroupAddOutlined />}
-            onClick={() => setTeamCreate(true)}
-            style={
-              currentUser
-                ? {
-                    boxShadow:
-                      "0 0 7px 4px rgba(from var(--color-primary) r g b / .5",
-                  }
-                : {}
-            }
-          >
-            {t("PAGES.TEAMS.CREATE_TEAM")}
-          </Button>
+        <div className={currentTeam ? "show" : ""}>
+          <div className="flex flex-col max-w-56 w-full gap-3">
+            <Button
+              type="primary"
+              disabled={currentUser == undefined}
+              size="large"
+              icon={<UsergroupAddOutlined />}
+              onClick={() => setTeamCreate(true)}
+              style={
+                currentUser
+                  ? {
+                      boxShadow:
+                        "0 0 7px 4px rgba(from var(--color-primary) r g b / .5",
+                    }
+                  : {}
+              }
+            >
+              {t("PAGES.TEAMS.CREATE_TEAM")}
+            </Button>
 
-          {items ? (
-            <Menu
-              items={items}
-              selectedKeys={[selectedKey]}
-              onClick={onTeamSelected}
-              className="w-full"
-            />
-          ) : (
-            <Spin size="large" />
-          )}
+            {items ? (
+              <Menu
+                items={items}
+                selectedKeys={[selectedKey]}
+                onClick={onTeamSelected}
+                className="w-full"
+              />
+            ) : (
+              <Spin size="large" />
+            )}
+          </div>
         </div>
 
         {currentTeam ? (
-          <div className="flex gap-3 w-full flex-wrap content-start">
-            <Collapse
-              className="h-min min-w-96 flex-1"
-              defaultActiveKey={["overview"]}
-              items={[
-                {
-                  key: "overview",
-                  label: t("PAGES.TEAMS.OVERVIEW"),
-                  children: <TeamOverview team={currentTeam} />,
-                },
-              ]}
-            />
+          <div className="flex flex-col gap-3">
+            <Button
+              className="w-min hide"
+              icon={<LeftOutlined />}
+              onClick={() => {
+                setHideMenu(!hideMenu)
+                setCurrentTeam(undefined)
+                setSelectedKey("")
+              }}
+            >
+              Повернутися
+            </Button>
+            <div className="flex gap-3 w-full flex-wrap content-start">
+              <Collapse
+                className="h-min min-w-96 flex-1"
+                defaultActiveKey={["overview"]}
+                items={[
+                  {
+                    key: "overview",
+                    label: t("PAGES.TEAMS.OVERVIEW"),
+                    children: <TeamOverview team={currentTeam} />,
+                  },
+                ]}
+              />
 
-            <Collapse
-              className="h-min min-w-96 flex-1"
-              defaultActiveKey={["members"]}
-              items={[
-                {
-                  key: "members",
-                  label: t("PAGES.TEAMS.MEMBERS"),
-                  children: <TeamMembers team={currentTeam} />,
-                },
-              ]}
-            />
+              <Collapse
+                className="h-min min-w-96 flex-1"
+                defaultActiveKey={["members"]}
+                items={[
+                  {
+                    key: "members",
+                    label: t("PAGES.TEAMS.MEMBERS"),
+                    children: <TeamMembers team={currentTeam} />,
+                  },
+                ]}
+              />
 
-            <Collapse
-              className="h-min min-w-96 w-full"
-              items={[
-                {
-                  key: "members",
-                  label: t("PAGES.TEAMS.MATCHES"),
-                },
-              ]}
-            />
+              <Collapse
+                className="h-min min-w-96 w-full"
+                items={[
+                  {
+                    key: "members",
+                    label: t("PAGES.TEAMS.MATCHES"),
+                  },
+                ]}
+              />
 
-            <Collapse
-              className="h-min min-w-96 w-full"
-              items={[
-                {
-                  key: "members",
-                  label: t("PAGES.TEAMS.TOURNAMENTS"),
-                },
-              ]}
-            />
+              <Collapse
+                className="h-min min-w-96 w-full"
+                items={[
+                  {
+                    key: "members",
+                    label: t("PAGES.TEAMS.TOURNAMENTS"),
+                  },
+                ]}
+              />
+            </div>
           </div>
         ) : (
           <span
