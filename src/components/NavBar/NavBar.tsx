@@ -1,6 +1,6 @@
 import "../../index.css";
 import "./style.css";
-import {InboxOutlined} from "@ant-design/icons";
+import {InboxOutlined, MenuOutlined} from "@ant-design/icons";
 
 import {Badge, Button, Popover, Space} from "antd";
 import {Locale} from "antd/es/locale";
@@ -48,30 +48,33 @@ function NavBar() {
         style={{
           width: 1200,
           maxWidth: 1200,
-          backgroundColor: "rgba(from var(--color-background-secondary) r g b / .1)",
+          backgroundColor:
+            "rgba(from var(--color-background-secondary) r g b / .1)",
           backdropFilter: "blur(5px)",
         }}
       >
         <div>
           <Link to="/">
-            <b>Power<span style={{color: "var(--color-primary)"}}>Cup</span></b>
+            <b>
+              Power<span style={{ color: "var(--color-primary)" }}>Cup</span>
+            </b>
           </Link>
         </div>
 
-        <div className="flex gap-3 w-28">
+        <div className="flex gap-3 w-28 links">
           <Link to="/teams">{t("NAVBAR.TEAMS")}</Link>
           <Link to="/matches">{t("NAVBAR.MATCHES")}</Link>
           <Link to="/tournaments">{t("NAVBAR.TOURNAMENTS")}</Link>
         </div>
 
         <div className="flex gap-x-2" style={{ textAlign: "justify" }}>
-                    {is_logged ? (
+          {is_logged ? (
             <>
               <span>{current_user?.name}</span>
 
               <Popover
                 content={<InvitationsList />}
-                overlayStyle={{minWidth: 400}}
+                overlayStyle={{ minWidth: 400 }}
                 placement="bottomRight"
                 trigger="click"
               >
@@ -80,7 +83,7 @@ function NavBar() {
                 </Badge>
               </Popover>
 
-              <Space.Compact className="">
+              <Space.Compact>
                 <Button
                   type={selectedLanguage === "ua" ? "primary" : "default"}
                   onClick={() => setLng("ua")}
@@ -95,11 +98,13 @@ function NavBar() {
                 </Button>
               </Space.Compact>
 
-              <Button onClick={on_logout_button_click}>{t("NAVBAR.LOGOUT")}</Button>
+              <Button onClick={on_logout_button_click}>
+                {t("NAVBAR.LOGOUT")}
+              </Button>
             </>
           ) : (
             <>
-              <Space.Compact className="">
+              <Space.Compact>
                 <Button
                   type={selectedLanguage === "ua" ? "primary" : "default"}
                   onClick={() => setLng("ua")}
@@ -114,15 +119,44 @@ function NavBar() {
                 </Button>
               </Space.Compact>
 
-              <Link to="/login">
+              <Link className="links" to="/login">
                 <Button>{t("NAVBAR.LOGIN")}</Button>
               </Link>
 
-              <Link to="/register">
+              <Link className="links" to="/register">
                 <Button type="primary">{t("NAVBAR.REGISTER")}</Button>
               </Link>
             </>
           )}
+
+          <Popover
+            className="menu"
+            content={
+              <div>
+                <div className="flex flex-col items-end gap-3">
+                  <Link to="/teams">{t("NAVBAR.TEAMS")}</Link>
+                  <Link to="/matches">{t("NAVBAR.MATCHES")}</Link>
+                  <Link to="/tournaments">{t("NAVBAR.TOURNAMENTS")}</Link>
+
+                  {!is_logged ? (
+                    <Space.Compact>
+                      <Link to="/login">
+                        <Button>{t("NAVBAR.LOGIN")}</Button>
+                      </Link>
+
+                      <Link to="/register">
+                        <Button type="primary">{t("NAVBAR.REGISTER")}</Button>
+                      </Link>
+                    </Space.Compact>
+                  ) : (<></>)}
+                </div>
+              </div>
+            }
+            placement="bottomRight"
+            trigger="click"
+          >
+            <Button className="menu" type="primary" icon={<MenuOutlined />} />
+          </Popover>
         </div>
       </div>
     </header>

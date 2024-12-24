@@ -6,3 +6,21 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.menu {
+  display: none;
+}
+
+.links {
+  display: flex;
+}
+
+@media (max-width: 800px) {
+  .menu {
+    display: flex;
+  }
+
+  .links {
+    display: none;
+  }
+}
