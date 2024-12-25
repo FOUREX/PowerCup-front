@@ -3,7 +3,7 @@ import {Button, Card, Form, FormProps, Input, notification} from "antd";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router";
 import {admin} from "../../../api";
-import {CurrentAdministrator} from "../../../utils";
+import {CurrentAdministrator, CurrentUser} from "../../../utils";
 
 type FieldType = {
   username?: string;
@@ -22,6 +22,7 @@ export const LoginAdminPage = () => {
         password: values.password ?? "",
       });
 
+      CurrentUser.set(user);
       CurrentAdministrator.set(user);
       navigate("/");
     } catch (reason) {
