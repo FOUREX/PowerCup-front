@@ -9,7 +9,7 @@ import {
   notification,
   Select,
   SelectProps,
-  Space,
+  Space, Splitter,
   Upload
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
@@ -128,21 +128,24 @@ export const TournamentsPage = () => {
           </Form.Item>
 
           <Form.Item<TournamentFieldType> name="game" label="Гра">
-            <Space.Compact className="w-full">
-              <Select
-                placeholder="Виберіть гру"
-                options={gamesSelectOptions}
-                optionRender={(option: SelectProps[""]) => (
-                  <Space>
-                    <span role="img" aria-label={option.data.label}>
-                      {option.data.emoji}
-                    </span>
-                    {option.data.label}
-                  </Space>
-                )}
-              />
-              <Button icon={<PlusOutlined />} />
-            </Space.Compact>
+            <Select
+              placeholder="Виберіть гру"
+              options={gamesSelectOptions}
+              optionRender={(option: SelectProps[""]) => (
+                <Space>
+                  <span role="img" aria-label={option.data.label}>
+                    {option.data.emoji}
+                  </span>
+                  {option.data.label}
+                </Space>
+              )}
+              dropdownRender={(menu) => (
+                <>
+                  {menu}
+                  <Button className="w-full my-1" icon={<PlusOutlined />}>Додати</Button>
+                </>
+              )}
+            />
           </Form.Item>
 
           <Form.Item<TournamentFieldType>
