@@ -353,6 +353,13 @@ export const TeamsPage = () => {
                 setHideMenu(!hideMenu)
                 setCurrentTeam(undefined)
                 setSelectedKey("")
+
+                const params = new URLSearchParams(searchParams);
+                params.delete("team_id");
+
+                setSearchParams(params);
+
+                selectedFromMenu.current = true;
               }}
             >
               Повернутися
