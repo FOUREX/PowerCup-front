@@ -61,7 +61,7 @@ export const TournamentsPage = () => {
       await createTournament({
         name: values.name,
         description: values.description,
-        game_id: 30, // values.game,
+        game_id: values.game,
         poster: values.poster[0].originFileObj,
       });
 
