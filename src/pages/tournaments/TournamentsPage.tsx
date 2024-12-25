@@ -3,7 +3,6 @@ import {
   Button,
   Form,
   FormProps,
-  Image,
   Input,
   List,
   Modal,
@@ -15,6 +14,7 @@ import {
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import {useEffect, useState} from "react";
+import {useTranslation} from "react-i18next";
 import {fetchGames} from "../../api";
 import {createTournament, fetchTournaments} from "../../api/tournament.api.ts";
 import {Game, Tournament} from "../../api/types.ts";
@@ -29,6 +29,7 @@ type TournamentFieldType = {
 }
 
 export const TournamentsPage = () => {
+  const { t }: { t: (key: string, options?: object) => string } = useTranslation()
   const currentAdmin = CurrentAdministrator.get()
   const [api, contextHolder] = notification.useNotification();
 
@@ -53,17 +54,27 @@ export const TournamentsPage = () => {
     setModalOpen(false)
   }
 
-  const onStartTournament: FormProps<TournamentFieldType>["onFinish"] = async (values) => {
-    await createTournament({
-      name: values.name,
-      description: values.description,
-      game_id: 30,  // values.game,
-      poster: values.poster[0].originFileObj
-    })
+  const onStartTournament: FormProps<TournamentFieldType>["onFinish"] = async (
+    values,
+  ) => {
+    try {
+      await createTournament({
+        name: values.name,
+        description: values.description,
+        game_id: 30, // values.game,
+        poster: values.poster[0].originFileObj,
+      });
 
-    setModalOpen(false)
-    window.location.reload()
-  }
+      setModalOpen(false);
+      window.location.reload();
+    } catch (reason) {
+      api.error({
+        message: "Не вдалося створити турнір",
+        description: reason.message,
+        placement: "bottomRight",
+      })
+    }
+  };
 
   useEffect(() => {
     fetchGames().then((games) => {
@@ -148,7 +159,7 @@ export const TournamentsPage = () => {
       </Modal>
       <Content>
         <div className="flex w-full justify-between items-center">
-          <h1 className="m-0">Активні турніри</h1>
+          <h1 className="m-0">{t("PAGES.TOURNAMENTS.ACTIVE_TOURNAMENTS")}</h1>
 
           {currentAdmin ? (
             <Button
@@ -161,7 +172,7 @@ export const TournamentsPage = () => {
                   "0 0 7px 4px rgba(from var(--color-primary) r g b / .5",
               }}
             >
-              Створити турнір
+              {t("PAGES.TOURNAMENTS.CREATE_TOURNAMENT")}
             </Button>
           ) : (
             <></>

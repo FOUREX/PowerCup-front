@@ -4,7 +4,7 @@ import type { FormProps } from "antd";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router";
 import { login } from "../../api";
-import {CurrentUser} from "../../utils";
+import {CurrentAdministrator, CurrentUser} from "../../utils";
 
 type FieldType = {
   username?: string;
@@ -24,6 +24,7 @@ export const LoginPage = () => {
       });
 
       CurrentUser.set(user);
+      CurrentAdministrator.del()
       navigate("/");
     } catch (reason) {
       api.error({

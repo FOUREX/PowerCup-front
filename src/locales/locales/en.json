@@ -94,6 +94,10 @@
       "OVERVIEW": "Overview",
       "TEAM_NOT_SELECTED": "Team not selected",
       "TOURNAMENTS": "Tournaments"
+    },
+    "TOURNAMENTS": {
+      "ACTIVE_TOURNAMENTS": "Active tournaments",
+      "CREATE_TOURNAMENT": "Create tournament"
     }
   },
   "TEAMS": {

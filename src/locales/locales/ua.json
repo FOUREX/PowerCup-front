@@ -94,6 +94,10 @@
       "OVERVIEW": "Огляд",
       "TEAM_NOT_SELECTED": "Команда не вибрана",
       "TOURNAMENTS": "Турніри"
+    },
+    "TOURNAMENTS": {
+      "ACTIVE_TOURNAMENTS": "Активні турніри",
+      "CREATE_TOURNAMENT": "Створити турнір"
     }
   },
   "TEAMS": {
