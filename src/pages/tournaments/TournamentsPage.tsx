@@ -9,7 +9,7 @@ import {
   notification,
   Select,
   SelectProps,
-  Space, Splitter,
+  Space,
   Upload
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
