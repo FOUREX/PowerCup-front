@@ -34,6 +34,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 import { CurrentUser } from "utils";
+import {instance} from "../../api/base.api.ts";
 import { TeamMembers, TeamOverview } from "../../components";
 
 import "./style.css";
